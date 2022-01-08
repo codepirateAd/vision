@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Camera</title>
+	<style type="text/css">
+		.booth{
+			width: 400px;
+			background: #ccc;
+			margin: 0 auto;
+			border: 10px solid #ddd;
+		}
+	</style>
+</head>
+<body>
+	<div class="booth">
+		<video id="video" width="400px;" height="300" autoplay></video>
+		<canvas id="canvas" width="400" height="300"></canvas>
+	</div>
+	<script type="text/javascript">
+		(function(){
+			var canvas = document.getElementById('canvas'),
+			context = canvas.getContext('2d'),
+			video = document.getElementById('video'),
+			vendorUrl = window.URL || window.webkitURL;
+			navigator.getMedia = navigator.getUserMedia || 
+								navigator.webkitGetUserMedia || 
+								navigator.mozGetUserMedia || 
+								navigator.msGetUserMedia;
+
+			navigator.getMedia({
+				video: true,
+				audio: false
+			},function(stream){
+				// video.src = vendorUrl.createObjectURL(stream);
+				// video.play();
+				video.srcObject = s;
+				video.play();
+			},function(error){
+				// An error occured
+				//error.code
+			});
+
+		})();
+	</script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<!-- Designined by CodingLab | www.youtube.com/codinglabyt -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title> Vision To Learn </title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Boxiocns CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <style>
+ html {
+            overflow: auto;
+        }
+          
+        html,
+        body,
+        div,
+        iframe {
+            margin: 0px;
+            padding: 0px;
+            height: 67.3%;
+        }
+          
+        iframe {
+            display: block;
+            width: 44.6%;
+            border: 1px solid black;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        </style>
+
+   </head>
+<body>
+  <div class="sidebar close">
+    <div class="logo-details">
+      <i class='bx bxl-c-plus-plus'></i>
+      <span class="logo_name">Vision</span>
+    </div>
+    <ul class="nav-links">
+      <li>
+        <a href="#">
+          <i class='bx bx-grid-alt' ></i>
+          <span class="link_name">Dashboard</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Computer Vision</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="iocn-link">
+          <a href="#">
+            <i class='bx bx-image' ></i>
+            <span class="link_name">Computer Vision</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">Computer Vision</a></li>
+          <li><a href="#">OpenCV</a></li>
+          <li><a href="#">Load images</a></li>
+          <li><a href="igray.html">Convert to gray Scale</a></li>
+          <li><a href="#">Contours</a></li>
+          <li><a href="#">Transformation</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="iocn-link">
+          <a href="#">
+            <i class='bx bx-camera' ></i>
+            <span class="link_name" >Camera Module</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">Camera Module</a></li>
+          <li><a href="#">Opening Camera</a></li>
+          <li><a href="cgrayconvert.html">Gray Scale</a></li>
+          <li><a href="#">Face Detection</a></li>
+          <li><a href="#">Motion Detection</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="iocn-link">
+          <a href="#">
+            <i class='bx bx-book-alt' ></i>
+            <span class="link_name">Posts</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">Posts</a></li>
+          <li><a href="#">Web Design</a></li>
+          <li><a href="#">Login Form</a></li>
+          <li><a href="#">Card Design</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-pie-chart-alt-2' ></i>
+          <span class="link_name">Analytics</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Analytics</a></li>
+        </ul>
+      </li>
+     
+      <li>
+        <div class="iocn-link">
+          <a href="#">
+            <i class='bx bx-plug' ></i>
+            <span class="link_name">About Us</span>
+          </a>
+        </div>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-compass' ></i>
+          <span class="link_name">Contact Us</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Contact Us</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-cog' ></i>
+          <span class="link_name">Setting</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Setting</a></li>
+        </ul>
+      </li>
+      <li>
+    </div>
+  </li>
+</ul>
+  </div>
+  <section class="home-section"  style="background-color: white;">
+    <div class="home-content" >
+      <i class='bx bx-menu' ></i>
+      <span class="text">Menu</span>
+    </div><br>
+    <b style="margin-left:20%;">Code</b><br><br>
+    <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:40%;height: 50%;border:solid black;border-width:.1em .1em .1em .1em;padding:.2em .6em;margin-left: 23%;"><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+<span style="color: #ffffff">capture</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.VideoCapture(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+  
+<span style="color: #fb660a; font-weight: bold">while</span><span style="color: #ffffff">(True):</span>
+      
+    <span style="color: #ffffff">ret,</span> <span style="color: #ffffff">frame</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">capture.read()</span>
+ 
+    <span style="color: #ffffff">grayFrame</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.cvtColor(frame,</span> <span style="color: #ffffff">cv2.COLOR_BGR2GRAY)</span>
+ 
+    <span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&#39;video gray&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">grayFrame)</span>
+    <span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&#39;video original&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">frame)</span>
+      
+    <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">)</span> <span style="color: #ffffff">==</span> <span style="color: #0086f7; font-weight: bold">27</span><span style="color: #ffffff">:</span>
+        <span style="color: #fb660a; font-weight: bold">break</span>
+  
+<span style="color: #ffffff">capture.release()</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></div><br><br>
+<button style="margin-left:40%;height: 50px;width: 70px;font-size: 30px;" onclick="display()">Test</button><br><br>
+
+          <div style="height: 100%;overflow: true;" id="hello" style="border: 1px solid black;">
+          
+          </div>
+  </section>
+  
+  <script src="script.js">  </script>
+  <script type="text/javascript">
+    function display(){
+      document.getElementById("hello").innerHTML = "<iframe id=\"hello\"src=\"hello.html\"  frameborder=\"0\" marginheight=\"0\" marginwidth=\"0\" scrolling=\"auto\"style=\"margin-left: 20%;\"></iframe>"
+    }
+  </script>
+
+</body>
+</html>
