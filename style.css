@@ -6,6 +6,7 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+
 .sidebar{
   position: fixed;
   top: 0;
@@ -238,6 +239,12 @@
   font-size: 26px;
   font-weight: 600;
 }
+
+.dark-mode {
+  background-color: white;
+  color: black;
+}
+
 @media (max-width: 420px) {
   .sidebar.close .nav-links li .sub-menu{
     display: none;
