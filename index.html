@@ -43,7 +43,8 @@
         </div>
         <ul class="sub-menu">
           <li><a class="link_name" href="#">Computer Vision</a></li>
-          <li><a href="contents/1-intro.html" target="iframe1">Introduction</a></li>
+          <li><a href="javascript:navigate()">Introduction</a></li>
+          <!-- <li><a href="contents/1-intro.html" target="iframe1" onclick="change();">Introduction</a></li> -->
           <li><a href="#">Environment Setup</a></li>
           <!-- <li><a href="igray.html">Convert to gray Scale</a></li> -->
           <!-- <li><a href="#">Contours</a></li> -->
@@ -119,7 +120,7 @@
     <center><h1> Vision to Learn</h1>
     </center>
     <hr>
-    
+
     <iframe name="iframe1" 
               style="position:relative; border:0; height:100%; width:100%;"
               id="iframe1"
@@ -127,7 +128,12 @@
       </iframe>
 
   </section>
-
+  <script type="text/javascript">
+    function navigate() {
+            document.getElementById
+                ("iframe1").src = "contents/1-intro.html";
+        }
+  </script>
   <script src="script.js"></script>
 
 </body>
