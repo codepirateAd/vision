@@ -10,19 +10,50 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <style type="text/css">
     body,html{ height: 100%; margin:0; padding:0; overflow:hidden; }
-    iframe{
 
+    #contents{
+      display: none;
     }
+    #loader{
+      position: relative;
+      margin: 18% ;
+      margin-left: 500px;
 
+     
+      /*width: 100%;*/
+      /*height: 100%;*/
+      
+    }
+    #loader img{
+      width: 500px;overflow: hidden;
+    }
+    img{
+      width: 100%;
+    }
      </style>
+    
+    <script src="opencv.js"></script>
+    <script type="text/javascript">
+        // setTimeout(function() {}, 10);
+
+      window.onload=function(){
+        // const myTimeout = setTimeout(myGreeting, 500);
+        document.getElementById('loader').style.display= "none";
+        document.getElementById('contents').style.display= "block";
+      }
+    </script>
    </head>
 <body>
-
-  <div class="sidebar close" id="hello">
+<div id="loader">
+    <img src="https://miro.medium.com/max/1400/1*CsJ05WEGfunYMLGfsT2sXA.gif">
+    <h3 style="margin-left:140px;">Getting your Files Ready</h3>
+  </div>
+  <div class="sidebar close" id="hello" id="contents">
     <div class="logo-details">
       <i class='bx bxl-c-plus-plus'></i>
       <span class="logo_name">Vision</span>
     </div>
+
     <ul class="nav-links">
       <li>
         <a href="index.html">
@@ -43,7 +74,7 @@
         </div>
         <ul class="sub-menu">
           <li><a class="link_name" href="#">Computer Vision</a></li>
-          <li><a href="javascript:navigate()">Introduction</a></li>
+          <li><a href="javascript:intro()">Introduction</a></li>
           <!-- <li><a href="contents/1-intro.html" target="iframe1" onclick="change();">Introduction</a></li> -->
           <li><a href="#">Environment Setup</a></li>
           <!-- <li><a href="igray.html">Convert to gray Scale</a></li> -->
@@ -120,19 +151,19 @@
     <center><h1> Vision to Learn</h1>
     </center>
     <hr>
-
+<!-- 
     <iframe name="iframe1" 
               style="position:relative; border:0; height:100%; width:100%;"
               id="iframe1"
               >
-      </iframe>
-
+      </iframe> -->
   </section>
   <script type="text/javascript">
-    function navigate() {
-            document.getElementById
-                ("iframe1").src = "contents/1-intro.html";
-        }
+    // function intro() {
+    //         document.getElementById
+    //             ("iframe1").src = "contents/1-intro.html";
+    //     }
+
   </script>
   <script src="script.js"></script>
 
