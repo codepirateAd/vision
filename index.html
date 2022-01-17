@@ -32,7 +32,6 @@
     }
      </style>
     
-    <script src="opencv.js"></script>
     <script type="text/javascript">
         // setTimeout(function() {}, 10);
 
@@ -49,6 +48,8 @@
     <h3 style="margin-left:120px;">Getting your Files Ready</h3>
   </div>
   <div class="sidebar close" id="hello" id="contents">
+    <script src="opencv.js"></script>
+    
     <div class="logo-details">
       <i class='bx bxl-c-plus-plus'></i>
       <span class="logo_name">Vision</span>
@@ -76,7 +77,7 @@
           <li><a class="link_name" href="#">Computer Vision</a></li>
           <li><a href="javascript:intro()">Introduction</a></li>
           <!-- <li><a href="contents/1-intro.html" target="iframe1" onclick="change();">Introduction</a></li> -->
-          <li><a href="javascript:int()">Environment Setup</a></li>
+          <li><a href="javascript:env()">Environment Setup</a></li>
           <!-- <li><a href="igray.html">Convert to gray Scale</a></li> -->
           <!-- <li><a href="#">Contours</a></li> -->
           <!-- <li><a href="#">Transformation</a></li> -->
@@ -163,10 +164,10 @@
             document.getElementById
                 ("iframe1").src = "contents/1-intro.html";
         }
-    function int() {
-            document.getElementById
-                ("iframe1").src = "igray.html";
-        }
+    // function int() {
+    //         document.getElementById
+    //             ("iframe1").src = "igray.html";
+    //     }
 
   </script>
   <script src="script.js"></script>
