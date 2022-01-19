@@ -245,8 +245,8 @@
   color: black;
 }
 
-@media (max-width: 420px) {
-  .sidebar.close .nav-links li .sub-menu{
+@media (max-width: 800px) { /*420px*/
+  /*.sidebar .close .nav-links li .sub-menu {
     display: none;
-  }
+  }*/
 }

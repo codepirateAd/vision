@@ -36,6 +36,27 @@ body {
     opacity: 0;
   }
 }
+body{
+	 padding: 2%;padding-right: 8%;padding-left: 8%;
+}
+@media (max-width: 800px) { /*420px*/
+  body{
+    padding: 0.2%;
+    font-size: 18px;
+    padding-right: 	1%;
+  }
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}*/
 </style>
     <script src="opencv.js"></script>
   <script type="text/javascript">
@@ -47,7 +68,7 @@ body {
 	<title></title>
 </head>
 <!-- <body style="overflow: hidden; "> -->
-<body style="padding: 2%;padding-right: 8%;padding-left: 8%;">
+<body">
 
 	<div id="loader">
 		<h3 style="margin-left: 0px;" class="blink_me">Please hold on for a moment...</h3>
