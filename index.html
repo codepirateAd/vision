@@ -38,22 +38,6 @@
 }
 
 
-@media (max-width: 800px) { /*420px*/
-  body{
-    position: relative;
-    z-index: 2;
-  }
-  div{
-    position: relative;
-    z-index: 1;
-  }
-  section{
-    position: relative;
-    z-index: 3;
-  }
-}
-
-}
      </style>
     
     <script type="text/javascript">
@@ -78,9 +62,9 @@
 
     <ul class="nav-links">
       <li>
-        <a href="index.html">
+        <a href="#">
           <i class='bx bx-grid-alt' ></i>
-          <span class="link_name" href="index.html">Dashboard</span>
+          <span class="link_name" href="#">Dashboard</span>
         </a>
         <ul class="sub-menu blank">
           <li><a class="link_name" href="index.html">Dashboard</a></li>
@@ -165,8 +149,8 @@
   </li>
 </ul>
   </div>
-  <section class="home-section"  style="background-color: white;" id="contents">
-    <div class="home-content">
+  <section class="home-section"  style="background-color: white;display: none;" id="contents">
+    <div class="home-content" style="margin: 0;padding: 0;">
       <i class='bx bx-menu'></i>
       <span class="text">Menu</span>
     </div>
@@ -179,7 +163,8 @@
               id="iframe1"
               >
       </iframe>
-  </section>
+
+  </section>  
   <script type="text/javascript">
     function intro() {
             document.getElementById
