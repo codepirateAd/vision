@@ -36,7 +36,22 @@
     opacity: 0;
   }
 }
+@media (max-width: 420px) { 
+  /*.home-section{
+    position: initial;
+  }
+  .sidebar{
+    display: none;
+  }
+  .home-section{
+    width: 100%;
+  }
+  .sidebar.close ~ .home-section {
+    width: calc(100%);/* width: calc(100% - 78px);
+}
+*/
 
+}
 
      </style>
     
@@ -47,7 +62,7 @@
       }
     </script>
    </head>
-<body>
+<body id="jj">
 <div id="loader">
     <img src="image/loading.gif">
     <h3 style="margin-left: 10px;" class="blink_me">Please Wait...</h3>
@@ -82,7 +97,7 @@
           <li><a class="link_name" href="#">Computer Vision</a></li>
           <li><a href="javascript:intro()">Introduction</a></li>
           <!-- <li><a href="contents/1-intro.html" target="iframe1" onclick="change();">Introduction</a></li> -->
-          <li><a href="javascript:env()">Environment Setup</a></li>
+          <li><a href="javascript:env()">Installing Python</a></li>
           <!-- <li><a href="igray.html">Convert to gray Scale</a></li> -->
           <!-- <li><a href="#">Contours</a></li> -->
           <!-- <li><a href="#">Transformation</a></li> -->
@@ -170,10 +185,10 @@
             document.getElementById
                 ("iframe1").src = "contents/1-intro.html";
         }
-    // function int() {
-    //         document.getElementById
-    //             ("iframe1").src = "igray.html";
-    //     }
+    function env() {
+            document.getElementById
+                ("iframe1").src = "contents/2-env.html";
+        }
 
   </script>
   <script src="script.js"></script>

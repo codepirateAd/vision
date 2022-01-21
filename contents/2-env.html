@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+
+<style>
+body {
+    font-family: 'Open Sans';font-size: 20px;
+    text-align: justify;
+  	text-justify: inter-word;
+}
+    #contents{
+      display: none;
+    }
+    #loader{
+      position: absolute;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      width: 300px;
+      height: 100px;
+    }
+    #loader h3{
+      width: 400px;
+    }
+    .blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+body{
+	 padding: 2%;padding-right: 8%;padding-left: 8%;
+}
+@media (max-width: 420px) { /*420px*/
+  body{
+    padding: 0.2%;
+    font-size: 18px;
+    padding-right: 	1%;
+  }
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}*/
+}
+
+p{
+	line-height: 1.6;
+}
+img{
+	    object-fit: scale-down; max-width: 100%
+}
+</style>
+  <script type="text/javascript">
+      window.onload=function(){
+        document.getElementById('loader').style.display= "none";
+        document.getElementById('contents').style.display= "block";
+      }
+  </script>
+	<title></title>
+</head>
+<!-- <body style="overflow: hidden; "> -->
+<body">
+
+	<div id="loader">
+		<h3 style="margin-left: 0px;" class="blink_me">Please hold on for a moment...</h3>
+	</div>
+		<div id="contents">
+	<p>
+		<h3>Installing Python and OpenCV</h3>
+
+			To install Python on your local machine, get a copy of the standard distribution of Python software from <a href="https://www.python.org/downloads" target="_blank">here</a> based on your operating system, hardware architecture and version of your local machine.
+	</p>
+	<p>
+		<br><h3>Install Python on Windows</h3>
+	
+		To install Python on a Windows platform, you need to download the installer. A web-based installer, executable installer and embeddable zip files are available to install Python on Windows. Click <a href="https://www.python.org/downloads" target="_blank">here</a> and click on the Download Python 3.7.0 button as shown below. (3.7.0 is the latest version as of this writing.)<br><br>
+		<img src="../image/dwin1.png"><br><br>
+		<p>This will download python-3.7.0.exe for 32 bit. For the 64 bit installer, go <a href="https://www.python.org/downloads/windows" target="_blank">here</a> to and select the appropriate 64 bit installer, as shown below.</p><br>
+		<img src="../image/dwin2.png"><br><br>
+		<p>Download the Windows x86-64 executable installer and double click on it to start the python installation wizard as shown below.</p><br>
+		<img src="../image/dwin3.png"><br><br>
+		<p >Installation is a simple wizard-based process. As you can see in the above figure, the default installation folder will be C:\ Users\ {UserName}\ AppData\ Local\Programs\ Python\ Python37 for Python 3.7.0 64 bit. Check the Add Python 3.7 to PATH checkbox, so that you can execute python scripts from any path. You may choose the installation folder or feature by clicking on Customize installation. This will go to the next step of optional features, as shown below.</p><br>
+		<img src="../image/dwin4.png"><br><br>
+		<p>Click Next to continue.</p><br>
+		<img src="../image/dwin5.png"><br><br>
+		<p>In Advanced Options, select the Install for all users option so that any user of your local machine can execute Python scripts. Also, choose the installation folder to make a shorter path for Python executable (something like C:\python37), keeping the rest of the choices to default and finally click on the Install button.</p><br>
+		<img src="../image/dwin6.png"><br><br>
+		<p>After successful installation, you can check the Python installation by opening a command prompt and type python --version or python -V and press Enter. If Python installed successfully then it will display the installed version.</p>
+		<img src="../image/dwin7.png"><br><br>
+	</p>
+	<p>
+		<h3>Install Python on Mac OS X</h3><br>
+		You can install Python by downloading official installer from <a href="https://www.python.org/downloads/mac-osx" target="_blank">downloads/mac-ox</a> page. Download the latest version of Python under the heading Python Releases for Mac OS X. Double click on the installer file to start the installation wizard.<br><br>
+
+		On the installation wizard, click on <b>Continue</b> a few times until you're asked to agree to the software license agreement, click on <b>Agree</b> and finish the installation.
+	</p><br>
+	<p>
+		<h3>Install Python on Linux</h3><br>
+		Most of Linux distributions come with Python already installed. However, the Python 2.x version is incorporated in many of them. To check if Python 3.x is available, run the following command in the Linux terminal:<br><br>
+		<img src="../image/dl.png"><br><br>
+		If available, it will return the path to the Python3 executable as /usr/local/bin/python3.
+		<br><br>To install Python on Ubuntu 18.04, Ubuntu 20.04 and above, execute the following commands:<br><br>
+		<img src="../image/dl1.png"><br><br>
+	</p><br><Br>
+		<h3> Videos</h3><br>
+		<!-- <iframe width="320" height="215"
+src="https://www.youtube.com/embed/RT2NygId7ds">
+</iframe> -->
+	</p>
+</div><br><br><br><br>
+</body>
+</html>
