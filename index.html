@@ -113,8 +113,8 @@
         </div>
         <ul class="sub-menu">
           <li><a class="link_name" href="#">Camera Module</a></li>
-          <li><a href="#">Open Camera</a></li>
-          <li><a href="#">Gray Scale</a></li>
+          <li><a href="#">Video Capture</a></li> <!-- javascript:cam() -->
+          <!-- <li><a href="#">Gray Scale</a></li> -->
           <!-- <li><a href="cgrayconvert.html" target="iframe1">Gray Scale</a></li> -->
           <!-- <li><a href="#">Face Detection</a></li> -->
           <!-- <li><a href="#">Motion Detection</a></li> -->
@@ -194,6 +194,10 @@
                 ("iframe1").src = "contents/3-basics.html";
         }
 
+      function cam() {
+            document.getElementById
+                ("iframe1").src = "contents/1-cam.html";
+      }
   </script>
   <script src="script.js"></script>
 

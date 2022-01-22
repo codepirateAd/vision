@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+
+<style>
+body {
+    font-family: 'Open Sans';font-size: 20px;
+    text-align: justify;
+  	text-justify: inter-word;
+}
+    #contents{
+      display: none;
+    }
+    #loader{
+      position: absolute;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      width: 300px;
+      height: 100px;
+    }
+    #loader h3{
+      width: 400px;
+    }
+    .blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+body{
+	 padding: 2%;padding-right: 8%;padding-left: 8%;
+}
+@media (max-width: 420px) { /*420px*/
+	#code{
+		font-size: 11px;
+	}
+  body{
+    padding: 0.2%;
+    font-size: 18px;
+    padding-right: 	1%;
+  }
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}*/
+</style>
+  <script type="text/javascript">
+      window.onload=function(){
+        document.getElementById('loader').style.display= "none";
+        document.getElementById('contents').style.display= "block";
+      }
+  </script>
+	<title></title>
+</head>
+<!-- <body style="overflow: hidden; "> -->
+<body>
+
+	<div id="loader">
+		<h3 style="margin-left: 0px;" class="blink_me">Please hold on for a moment...</h3>
+	</div>
+		<div id="contents">
+	<p>
+		<h2>Capture Video from Camera</h2>
+		Often, we have to capture live stream with a camera. OpenCV provides a very simple interface to do this. Let's capture a video from the camera (example a built-in webcam on my laptop).<br><Br>
+
+		To capture a video, you need to create a VideoCapture object. Its argument can be either the device index or the name of a video file. A device index is just the number to specify which camera. Normally one camera will be connected (as in my case). So I simply pass 0 (or -1). You can select the second camera by passing 1 and so on. After that, you can capture frame-by-frame. But at the end, we have to release the capture.<br><br>
+<div style="background: #111111; overflow:auto;width:auto;border:solid black;border-width:.1em .1em .1em .1em;padding:.2em .1em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>    
+<span style="color: #ffffff">cap</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.VideoCapture(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>  
+  
+<span style="color: #fb660a; font-weight: bold">while</span><span style="color: #ffffff">(cap.isOpened()):</span>  
+    <span style="color: #ffffff">ret,</span> <span style="color: #ffffff">frame</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cap.read()</span>  
+    <span style="color: #ffffff">gray</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.cvtColor(frame,</span> <span style="color: #ffffff">cv2.COLOR_BGR2GRAY)</span>  
+  
+    <span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&#39;frame&#39;</span><span style="color: #ffffff">,gray)</span>  
+    <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">)</span> <span style="color: #ffffff">&amp;</span> <span style="color: #0086f7; font-weight: bold">0xFF</span> <span style="color: #ffffff">==</span> <span style="color: #ffffff">ord(</span><span style="color: #0086d2">&#39;q&#39;</span><span style="color: #ffffff">):</span>  
+      <span style="color: #fb660a; font-weight: bold">break</span>  
+  
+<span style="color: #ffffff">cap.release()</span>  
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+</p>
+
+<p><center><button>Test the code</button></center>
+	</p>
+</div><br><br><br><br>
+
+</body>
+</html>
