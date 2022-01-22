@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+
+<style>
+body {
+    font-family: 'Open Sans';font-size: 20px;
+    text-align: justify;
+  	text-justify: inter-word;
+}
+    #contents{
+      display: none;
+    }
+    #loader{
+      position: absolute;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      width: 300px;
+      height: 100px;
+    }
+    #loader h3{
+      width: 400px;
+    }
+    .blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+body{
+	 padding: 2%;padding-right: 8%;padding-left: 8%;
+}
+@media (max-width: 420px) { /*420px*/
+  body{
+    padding: 0.2%;
+    font-size: 18px;
+    padding-right: 	1%;
+  }
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}*/
+}
+
+p{
+	line-height: 1.6;
+}
+img{
+	    object-fit: scale-down; max-width: 100%;
+}
+</style>
+  <script type="text/javascript">
+      window.onload=function(){
+        document.getElementById('loader').style.display= "none";
+        document.getElementById('contents').style.display= "block";
+      }
+  </script>
+	<title></title>
+</head>
+<!-- <body style="overflow: hidden; "> -->
+<body">
+
+	<div id="loader">
+		<h3 style="margin-left: 0px;" class="blink_me">Please hold on for a moment...</h3>
+	</div>
+		<div id="contents">
+	<p>
+		<h2><u>Installing Python and OpenCV</u></h2>
+
+			<h4>Prerequisite: <a href="2-env.html"> Install Python</a></h4>
+	</p><br>
+	<p>
+		<h3>Install OpenCV on Windows</h3>
+		To install OpenCV, one must have Python and PIP, preinstalled on their system. To check if your system already contains Python, go through the following instructions:<br><Br>
+
+		Open the Command line(search for cmd in the Run dialog (Win+ R).<br>
+		Now run the following command:<br><br>
+		<span style="padding: 0.5%;background-color: black;color: white;">python --version</span>
+	</p><br>
+	<p>
+		If Python is already installed, it will generate a message with the Python version available.<br><br>
+		<img src="../image/opd.png"><br>
+	</p>
+	<p>
+		If Python is not present, go through <a href="2-env.html"> Install Python on Windows</a> and follow the instructions provided.
+	</p><br>
+	<p>
+		Next Check pip version using the following command:<br><br>
+		<span style="padding: 0.5%;background-color: black;color: white;">pip -V</span><br><br>
+		<img src="../image/opd1.png"><br>
+	</p>
+	<p>
+		<h4> Download and Install Python </h4>
+		OpenCV can be directly downloaded and installed with the use of pip (package manager). To install OpenCV, just go to the command-line and type the following command:<br><Br>
+		<span style="padding: 0.5%;background-color: black;color: white;">pip install opencv-python</span><br>
+	</p><br>
+	<p>
+		To check whether opencv have been installed correctly, you can run the following command:<br>
+		<div style="object-fit: scale-down; max-width: 100%;background-color: black;">
+		<span style="padding: 0.5%;color: white;">python<br>>>> import cv2<br>>>> print(cv2.__version__)</span>
+		</div><br><br>
+
+		<img src="../image/opd2.png"><br><br>
+		Installed Successfully.<br>
+	</p>
+	
+</div><br><br><br>
+</body>
+</html>

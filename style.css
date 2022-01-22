@@ -246,9 +246,9 @@
 }
 
 @media (max-width: 420px) { /*420px*/
-  /*.sidebar .close .nav-links li .sub-menu {
+  .sidebar .close .nav-links li .sub-menu {
     display: none;
-  }*/
+  }
 }
 
 /* Test... */
