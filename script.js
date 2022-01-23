@@ -10,12 +10,13 @@ let sidebar = document.querySelector(".sidebar");
 let sidebarBtn = document.querySelector(".bx-menu");
 console.log("sidebarBtn");
 sidebarBtn.addEventListener("click", ()=>{
-if(document.getElementsByClassName('sidebar')[0].style.display == '' || document.getElementsByClassName('sidebar')[0].style.display == 'none'){
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+if(isMobile){
+  if(document.getElementsByClassName('sidebar')[0].style.display == '' || document.getElementsByClassName('sidebar')[0].style.display == 'none'){
     document.getElementsByClassName('sidebar')[0].style.display ="block";
     document.getElementsByClassName('home-section')[0].style.position ="relative";
     console.log("if...");
     sidebar.classList.toggle("close");
-
 
   }
   else{
@@ -25,6 +26,10 @@ if(document.getElementsByClassName('sidebar')[0].style.display == '' || document
     document.getElementsByClassName('home-section')[0].style.width="100%";
     sidebar.classList.toggle("close");
   }
+}
+else{
+    sidebar.classList.toggle("close");
+}
 });
 
 
