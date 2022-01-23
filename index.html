@@ -112,7 +112,7 @@
         <ul class="sub-menu">
           <li><a class="link_name" href="#">Camera Module</a></li>
           <li><a href="javascript:cam()">Video Capture</a></li> <!-- javascript:cam() -->
-          <!-- <li><a href="#">Gray Scale</a></li> -->
+          <li><a href="javascript:cam2()">Convert to Gray Scale</a></li>
           <!-- <li><a href="cgrayconvert.html" target="iframe1">Gray Scale</a></li> -->
           <!-- <li><a href="#">Face Detection</a></li> -->
           <!-- <li><a href="#">Motion Detection</a></li> -->
@@ -187,15 +187,15 @@
             document.getElementById
                 ("iframe1").src = "contents/2-opencv.html";
         }
-    function basics() {
-            document.getElementById
-                ("iframe1").src = "contents/3-basics.html";
-        }
-
       function cam() {
             document.getElementById
                 ("iframe1").src = "contents/1-cam.html";
       }
+      function cam2() {
+            document.getElementById
+                ("iframe1").src = "contents/2-gray.html";
+        }
+
   </script>
   <script src="script.js"></script>
 
