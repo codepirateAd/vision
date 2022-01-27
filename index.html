@@ -45,7 +45,7 @@
   }
  
   .sidebar.close ~ .home-section {
-    width: 100%;/* width: calc(100% - 78px);
+    width: 100%;/* width: calc(100% - 78px);*/
 }
 
 
@@ -170,7 +170,26 @@
     <center><h1> Vision to Learn</h1>
     </center>
     <hr>
+    <section id="displaycontent" style="  float: left;
+    position: relative;
+    left: 50%;">
+  
 
+      <!-- <div style="float: left;
+      position: relative;
+      left: -50%;">
+    <h2> Contents </h2>
+    <br>
+    <h4>Compute Vision</h4>
+      <a href="javascript:intro()" id="intro">Introduction</a><br>
+      <a href="javascript:env()" id="env">Environment setup</a><br>
+    <br>
+
+    <h4>Camera Module</h4>
+      <a href="javascript:cam()" id="videocapture">Video Capture</a><br>
+      <a href="javascript:cam2()" id="grayscale">Convert to Grey Scale</a><Br>
+  </div> -->
+  </section>
     <iframe name="iframe1" 
               style="position:relative; border:0; height:100%; width:100%;"
               id="iframe1"
@@ -179,21 +198,47 @@
 
   </section>  
   <script type="text/javascript">
+      const url = new URL(window.location.href);
+      function hide(){
+        document.getElementById("displaycontent").style.display="none";
+      }
+
+      if(url.hash=="#intro")
+        intro();
+      else if(url.hash=="#env")
+        env();
+      else if(url.hash=="#videocapture")
+        cam();
+      else if(url.hash=="#grayscale")
+        cam2();
+    
     function intro() {
+            hide();
             document.getElementById
                 ("iframe1").src = "contents/1-intro.html";
+                history.replaceState(null,null, window.location.pathname + "#intro");
+
         }
     function env() {
+            hide();
             document.getElementById
                 ("iframe1").src = "contents/2-opencv.html";
+                history.replaceState(null,null, window.location.pathname + "#env");
+
         }
       function cam() {
+            hide();
             document.getElementById
                 ("iframe1").src = "contents/1-cam.html";
+                history.replaceState(null,null, window.location.pathname + "#videocapture");
+
       }
       function cam2() {
+            hide();
             document.getElementById
                 ("iframe1").src = "contents/2-gray.html";
+                history.replaceState(null,null, window.location.pathname + "#grayscale");
+
         }
 
   </script>
