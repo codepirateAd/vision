@@ -217,7 +217,7 @@
             document.getElementById
                 ("iframe1").src = "contents/1-intro.html";
                 history.replaceState(null,null, window.location.pathname + "#intro");
-                const url1 = new URL(window.location.pathname);
+                const url1 = new URL(window.location.href);
                 console.log(url1);
                 console.log("pathname: "+window.location.pathname);
 
