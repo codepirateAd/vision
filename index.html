@@ -96,9 +96,8 @@
           <li><a href="javascript:intro()">Introduction</a></li>
           <!-- <li><a href="contents/1-intro.html" target="iframe1" onclick="change();">Introduction</a></li> -->
           <li><a href="javascript:env()">Environment Setup</a></li>
-          <!-- <li><a href="javascript:basics()">Python Basics</a></li> -->
-          <!-- <li><a href="#">Contours</a></li> -->
-          <!-- <li><a href="#">Transformation</a></li> -->
+          <li><a href="javascript:rdw()">Read, Write and Display Image</a></li>
+          <li><a href="javascript:amp()">Accessing and Modifying Pixels</a></li>
         </ul>
       </li>
       <li>
@@ -211,6 +210,10 @@
         cam();
       else if(url.hash=="#grayscale")
         cam2();
+      else if(url.hash=="#rdw")
+        rdw();
+      else if(url.hash=="#amp")
+        amp();
     
     function intro() {
             hide();
@@ -241,6 +244,18 @@
                 history.replaceState(null,null, window.location.pathname + "#grayscale");
 
         }
+      function rdw(){
+         hide();
+            document.getElementById
+                ("iframe1").src = "contents/3-rdw.html";
+                history.replaceState(null,null, window.location.pathname + "#rdw");
+      }
+       function amp(){
+         hide();
+            document.getElementById
+                ("iframe1").src = "contents/4-amp.html";
+                history.replaceState(null,null, window.location.pathname + "#amp");
+      }
 
   </script>
   <script src="script.js"></script>
