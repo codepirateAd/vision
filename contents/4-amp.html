@@ -4,7 +4,6 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
-
 <style>
 body {
     font-family: 'Open Sans';font-size: 18px;
@@ -88,7 +87,9 @@ html {
 		<h3 style="margin-left: 0px;" class="blink_me">Please hold on for a moment...</h3>
 	</div>
 		<div id="contents">
+	<script src="../opencv.js"></script>
 	<p>
+
 		<h2>Accessing and Modifying Image Pixels</h2>
 		<p>Before accessing or modifying a pixel we have to import an image. For this example we are using the <span style="color: #0086d2">'tomatoes.jpg'</span> image.</p><br>
 
@@ -108,9 +109,13 @@ Let's try to modying the pixel which have been accessed using the following code
 We are slicing the image pixel using the above code. In x-axis we are accessing pixels from 100-150 and in the y-axis we are accessing pixels from 50-100 and changing it to rgb value 255,0,0(red, green, blue), which in this case change the pixels into red since green and blue values are set to 0.<br><br>
 
 <img src="../image/opd4.png" style="border: 1px solid black;"> 
-
-
-		
+<!-- 
+<p><h3>Code Simulator</h3><br>
+	<canvas id="input_img" style="width: 300px; height: 300px; border: 1px solid black; margin-right: 18%;" src="../image/opd3.png"></canvas>
+        <canvas id="output" style="width: 300px; height: 300px; border: 1px solid black;"></canvas><br>
+        <button id="fileinput" onclick="display()">Press</button>
+</p> -->
+		<br><br>Completed Sucessfully!
 		<br><br><h3> Videos</h3>
 		<iframe width="320" height="215"
 src="https://www.youtube.com/embed/OO75C0NA-NU">
@@ -119,3 +124,20 @@ src="https://www.youtube.com/embed/OO75C0NA-NU">
 </div><br><br><br><br><br><br><br><br>
 </body>
 </html>
+
+	<script type="text/javascript">
+    let file_input = document.getElementById('fileinput');
+
+    function display() {
+			let img_input = document.getElementById('input_img');
+      img_input.crossOrigin = "Anonymous";
+			let mat = cv.imread(img_input);
+        cv.cvtColor(mat,mat,cv.COLOR_RGB2GRAY);
+        cv.imshow('output',mat);
+        mat.delete();        
+    }
+
+
+
+        
+  	</script>

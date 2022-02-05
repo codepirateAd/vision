@@ -98,6 +98,7 @@
           <li><a href="javascript:env()">Environment Setup</a></li>
           <li><a href="javascript:rdw()">Accessing Images</a></li>
           <li><a href="javascript:amp()">Image Pixels</a></li>
+          <li><a href="javascript:geo()">Draw geometric shape</a></li>
         </ul>
       </li>
       <li>
@@ -214,6 +215,8 @@
         rdw();
       else if(url.hash=="#amp")
         amp();
+      else if(url.hash=="#geo")
+        geo();
     
     function intro() {
             hide();
@@ -255,6 +258,12 @@
             document.getElementById
                 ("iframe1").src = "contents/4-amp.html";
                 history.replaceState(null,null, window.location.pathname + "#amp");
+      }
+      function geo(){
+         hide();
+            document.getElementById
+                ("iframe1").src = "contents/5-geo.html";
+                history.replaceState(null,null, window.location.pathname + "#geo");
       }
 
   </script>
