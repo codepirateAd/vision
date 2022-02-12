@@ -38,11 +38,27 @@ body {
 body{
 	 padding: 2%;padding-right: 8%;padding-left: 8%;line-height: 1.6;
 }
+#input_img{
+	width: 300px;
+	height: 300px; 
+	border: 1px solid black; 
+	margin-right: 18%;
+	}
+#output{
+	width: 300px; 
+	height: 300px; 
+	border: 1px solid black;
+}
+
 @media (max-width: 420px) { /*420px*/
 
 .blink_me{
 	margin-left: 30px;
 	font-size: 18px;
+}
+#input_img, #output{
+		height: 200px;
+		width: 200px;
 }
 		img{
 			height: 50%;
@@ -96,7 +112,7 @@ html {
 <div style="background: #111111; overflow:auto;width:400px;border:solid black;border-width:.1em .1em .1em .1em;padding:.2em .1em;"><table><tr><td><pre style="margin: 0; line-height: 125%"></pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #ffffff">image</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.imread(</span><span style="color: #0086d2">&#39;tomatoes.jpg&#39;</span><span style="color: #ffffff">)</span>
 </pre></td></tr></table></div>
 <br><br>
-<img  style="border: 1px solid black;"src="../image/opd3.png"><br>
+<img  style="border: 1px solid black;"src="../image/opd3.png" id="imid"><br>
 <p> Now lets access the pixels of the image:</p>
 <div style="background: #111111; overflow:auto;width:400px;border:solid black;border-width:.1em .1em .1em .1em;padding:.2em .1em;"><table><tr><td><pre style="margin: 0; line-height: 125%"></pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #ffffff">image[</span><span style="color: #0086f7; font-weight: bold">100</span><span style="color: #ffffff">:</span><span style="color: #0086f7; font-weight: bold">150</span><span style="color: #ffffff">,</span><span style="color: #0086f7; font-weight: bold">50</span><span style="color: #ffffff">:</span><span style="color: #0086f7; font-weight: bold">100</span><span style="color: #ffffff">]</span>
 </pre></td></tr></table></div>
@@ -109,13 +125,45 @@ Let's try to modying the pixel which have been accessed using the following code
 We are slicing the image pixel using the above code. In x-axis we are accessing pixels from 100-150 and in the y-axis we are accessing pixels from 50-100 and changing it to rgb value 255,0,0(red, green, blue), which in this case change the pixels into red since green and blue values are set to 0.<br><br>
 
 <img src="../image/opd4.png" style="border: 1px solid black;"> 
-<!-- 
-<p><h3>Code Simulator</h3><br>
-	<canvas id="input_img" style="width: 300px; height: 300px; border: 1px solid black; margin-right: 18%;" src="../image/opd3.png"></canvas>
-        <canvas id="output" style="width: 300px; height: 300px; border: 1px solid black;"></canvas><br>
-        <button id="fileinput" onclick="display()">Press</button>
-</p> -->
-		<br><br>Completed Sucessfully!
+<br>	
+<br>
+<p><h3>Converting the image into gray scale</h3>
+Grayscale is the process in which we convert an image from different color spaces(RGB, HSV, CMYK,etc) to the shades of gray. <br><Br>
+A grayscale image is simply one in which the only colors are shades of gray. The reason for differentiating such images from any other sort of color image is that less information needs to be provided for each pixel.<br><Br>
+<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border:solid black;border-width:.1em .1em .1em .1em;padding:.2em .1em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>    
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.imread(</span><span style="color: #0086d2">&quot;tomatoes.jpg&quot;</span><span style="color: #ffffff">)</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f">#converting to gray scale</span>
+<span style="color: #ffffff">gray_image</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.cvtColor(img,</span> <span style="color: #ffffff">cv2.COLOR_BGR2GRAY)</span>
+ 
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&#39;Grayscale&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">gray_image)</span>
+
+<span style="color: #ffffff">cv2.waitKey()</span> 
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+<h3>Output</h3>
+<img src="../image/image.jpg" height="300" width="300" style="border: 1px solid black;">
+</p>
+<p><h3>Test the code with your own images</h3>
+        <input type="file" id="fileinput"><br><br>
+	<!-- <canvas id="myCanvas" height="330" width="299" style="border:1px solid black;"> -->
+<!-- </canvas><br> -->
+<!-- <canvas id="myCanvas1" height="330" width="299" style="border:1px solid black;"> -->
+<!-- </canvas><br> -->
+        <img id="input_img" >
+        <canvas id="output"></canvas><br>
+<!-- <button onclick="display()"> Press</button> -->
+</p>
+		Completed Successfully!
 		<br><br><h3> Videos</h3>
 		<iframe width="320" height="215"
 src="https://www.youtube.com/embed/OO75C0NA-NU">
@@ -125,6 +173,23 @@ src="https://www.youtube.com/embed/OO75C0NA-NU">
 </body>
 </html>
 
+<script>
+    let img_input = document.getElementById('input_img');
+    let file_input = document.getElementById('fileinput');
+
+    file_input.addEventListener('change',(e)=> {
+        img_input.src = URL.createObjectURL(e.target.files[0])
+    },false);
+
+    img_input.onload = function(){
+        let mat = cv.imread(img_input);
+        cv.cvtColor(mat,mat,cv.COLOR_RGB2GRAY);
+				cv.imshow('output', mat);
+        mat.delete();
+    }
+</script>
+
+<!-- 
 	<script type="text/javascript">
     let file_input = document.getElementById('fileinput');
 
@@ -137,7 +202,23 @@ src="https://www.youtube.com/embed/OO75C0NA-NU">
         mat.delete();        
     }
 
+  	</script> -->
+  	<!-- <script>
+// window.onload = function() {
+  var c = document.getElementById("myCanvas");
+  var ctx = c.getContext("2d");
+  var img = document.getElementById("imid");
+  ctx.drawImage(img,0,0);
 
-
-        
-  	</script>
+   function display() {
+		let src = cv.imread('imid');
+let dst = new cv.Mat();
+// To distinguish the input and output, we graying the image.
+// You can try different conversions.
+cv.cvtColor(src, dst, cv.COLOR_RGBA2GRAY);
+cv.imshow('myCanvas2', dst);
+src.delete();
+dst.delete();
+    }
+// }
+</script> -->
