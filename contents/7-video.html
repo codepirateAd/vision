@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+
+<style>
+body {
+    font-family: 'Open Sans';font-size: 18px;
+    text-align: justify;
+  	text-justify: inter-word;
+}
+    #contents{
+      display: none;
+    }
+    #loader{
+      position: absolute;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      width: 300px;
+      height: 100px;
+    }
+    #loader h3{
+      width: 400px;
+    }
+    .blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+body{
+	 padding: 2%;padding-right: 8%;padding-left: 8%;line-height: 1.6;
+}
+@media (max-width: 420px) { /*420px*/
+
+		img{
+			height: 50%;
+			width: 50%;
+		}
+		iframe{
+		width: 220px;
+		height:180px ;
+	}
+  body{
+    padding: 0.2%;
+    font-size: 14px;
+    padding-right: 	1%;
+	line-height: 1.6;
+    
+  }
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+	/* Optional: show position indicator in red
+	::-webkit-scrollbar-thumb {
+	    background: #FF0000;
+	}*/
+</style>
+  <script type="text/javascript">
+      window.onload=function(){
+        document.getElementById('loader').style.display= "none";
+        document.getElementById('contents').style.display= "block";
+      }
+  </script>
+	<title></title>
+</head>
+<!-- <body style="overflow: hidden; "> -->
+<body>
+
+	<div id="loader">
+		<h3 style="margin-left: 0px;" class="blink_me">Please hold on for a moment...</h3>
+	</div>
+		<div id="contents">
+	<p>
+		<h2>Read, display and Save Video</h2>
+		In this section we will learn how to read a video, display it on a frame or record live video
+		from the camera and save the video.<br><br>
+		<h4>Reading a video</h4>
+		Videos can read videos in two ways in opencv, either by reading a video file or using the video stream directly from a camera connected to your computer. The first approach towards reading a video file is creating a VideoCapture Object and we need to specify the video filename. The second approach needs cameras parameters to access its real-time video stream.<br><br>
+		Let’s imagine that you want to read a video from your camera. As everyone has most likely one camera, it will be indexed with ‘0’ and if more ‘1’, ‘2’ and so on. Lets see the code for it.<br><br>
+		<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border:solid black;border-width:.1em .1em .1em .1em;padding:.2em .1em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-style: italic; background-color: #0f140f"># Create a VideoCapture object and pass 0</span>
+<span style="color: #ffffff">cap</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.VideoCapture(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+</pre></div><br><br>
+On the other hand, when we want to load an mp4 file, the parameter you are going to pass in is the absolute or relative path to the file.<br><br>
+<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border:solid black;border-width:.1em .1em .1em .1em;padding:.2em .1em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-style: italic; background-color: #0f140f"># Create a VideoCapture object and read from input file</span>
+<span style="color: #ffffff">cap</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.VideoCapture(</span><span style="color: #0086d2">&#39;game_of_throne_trailer.mp4&#39;</span><span style="color: #ffffff">)</span>
+</pre></div>
+<br><br>
+When working with video files, reading a video file or capturing live stream is not enough. We also want to process the video and display it. To display a video in an open window, OpenCV provides a very simple interface to do this, using the command cv2.imshow in Python.<br><br>
+<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border:solid black;border-width:.1em .1em .1em .1em;padding:.2em .1em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># Create a VideoCapture object and read from input file</span>
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># If the input is taken from the camera, pass 0 instead of the video file name.</span>
+<span style="color: #ffffff">cap</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.VideoCapture(</span><span style="color: #0086d2">&#39;game_of_throne_trailer.mp4&#39;</span><span style="color: #ffffff">)</span>
+ 
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># Check if camera opened successfully</span>
+<span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">(cap.isOpened()</span> <span style="color: #ffffff">==</span> <span style="color: #fb660a; font-weight: bold">False</span><span style="color: #ffffff">):</span> 
+    <span style="color: #ffffff">print(</span><span style="color: #0086d2">&quot;Error opening video stream or file&quot;</span><span style="color: #ffffff">)</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># Read until video is completed</span>
+<span style="color: #fb660a; font-weight: bold">while</span><span style="color: #ffffff">(cap.isOpened()):</span>
+    
+    <span style="color: #008800; font-style: italic; background-color: #0f140f"># Capture frame-by-frame</span>
+    <span style="color: #ffffff">ret,</span> <span style="color: #ffffff">frame</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cap.read()</span>
+    
+    <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">ret</span> <span style="color: #ffffff">==</span> <span style="color: #fb660a; font-weight: bold">True</span><span style="color: #ffffff">:</span>
+        <span style="color: #008800; font-style: italic; background-color: #0f140f"># Display the frame</span>
+        <span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&#39;Frame&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">frame)</span>
+
+    <span style="color: #008800; font-style: italic; background-color: #0f140f"># Press q to exit</span>
+    <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">25</span><span style="color: #ffffff">)</span> <span style="color: #ffffff">&amp;</span> <span style="color: #0086f7; font-weight: bold">0xFF</span> <span style="color: #ffffff">==</span> <span style="color: #ffffff">ord(</span><span style="color: #0086d2">&#39;q&#39;</span><span style="color: #ffffff">):</span>
+        <span style="color: #fb660a; font-weight: bold">break</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># Release the video capture object</span>
+<span style="color: #ffffff">cap.release()</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># Closes all the frames</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div><br><br>
+<h3>Writing a Video</h3>
+As the next step, we want to save the captured frames as a video file. First, in order to be able to write our file, a Video Writer object must be created. This object takes as input parameters the output file name. It is worth mentioning that Fourcc (4-character code of codec) is used to compress the frames. More details related to this code type you can find here. Another parameter when we save video files is frame per second (fps), which controls how many frames you want to show per second in the output video. Finally, the frame size is also passed, which the width and height have been denoted.<br><Br>
+<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border:solid black;border-width:.1em .1em .1em .1em;padding:.2em .1em;"><table><tr><td><pre style="margin: 0; line-height: 125%; color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+ 
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># Create a VideoCapture object</span>
+<span style="color: #ffffff">cap</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.VideoCapture(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+ 
+<span style="color: #ffffff">out</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.VideoWriter(</span><span style="color: #0086d2">&#39;output.avi&#39;</span><span style="color: #ffffff">,cv2.VideoWriter_fourcc(*</span><span style="color: #0086d2">&#39;XVID&#39;</span><span style="color: #ffffff">),</span> <span style="color: #0086f7; font-weight: bold">20</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">640</span><span style="color: #ffffff">,</span><span style="color: #0086f7; font-weight: bold">480</span><span style="color: #ffffff">))</span>
+ 
+<span style="color: #fb660a; font-weight: bold">while</span><span style="color: #ffffff">(</span><span style="color: #fb660a; font-weight: bold">True</span><span style="color: #ffffff">):</span>
+    
+    <span style="color: #ffffff">ret,</span> <span style="color: #ffffff">frame</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cap.read()</span>
+
+    <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">ret</span> <span style="color: #ffffff">==</span> <span style="color: #fb660a; font-weight: bold">True</span><span style="color: #ffffff">:</span> 
+
+        <span style="color: #008800; font-style: italic; background-color: #0f140f"># Write the frame into the file &#39;output.avi&#39;</span>
+        <span style="color: #ffffff">out.write(frame)</span>
+
+    <span style="color: #008800; font-style: italic; background-color: #0f140f"># Display the resulting frame    </span>
+    <span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&#39;frame&#39;</span><span style="color: #ffffff">,frame)</span>
+
+    <span style="color: #008800; font-style: italic; background-color: #0f140f"># Press Q on keyboard to stop recording</span>
+    <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">)</span> <span style="color: #ffffff">&amp;</span> <span style="color: #0086f7; font-weight: bold">0xFF</span> <span style="color: #ffffff">==</span> <span style="color: #ffffff">ord(</span><span style="color: #0086d2">&#39;q&#39;</span><span style="color: #ffffff">):</span>
+        <span style="color: #fb660a; font-weight: bold">break</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># When everything done, release the video capture and video write objects</span>
+<span style="color: #ffffff">cap.release()</span>
+<span style="color: #ffffff">out.release()</span>
+ 
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># Closes all the frames</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span> 
+</pre></td></tr></table></div>
+
+	</p>
+		<br>
+		<br><h3> Videos</h3>
+		<iframe width="320" height="215"
+src="https://www.youtube.com/embed/-uP3c0PeOA8">
+</iframe>
+	</p>
+</div><br><br><br><br><br><br><br><br>
+</body>
+</html>

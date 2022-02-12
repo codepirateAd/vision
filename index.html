@@ -99,6 +99,8 @@
           <li><a href="javascript:rdw()">Accessing Images</a></li>
           <li><a href="javascript:amp()">Image Pixels</a></li>
           <li><a href="javascript:geo()">Draw geometric shape</a></li>
+          <li><a href="javascript:tcam()">Camera Parameters</a></li>
+          <li><a href="javascript:vid()">Working with videos</a></li>
         </ul>
       </li>
       <li>
@@ -217,7 +219,11 @@
         amp();
       else if(url.hash=="#geo")
         geo();
-    
+      else if(url.hash=="#tcam")
+        tcam();
+      else if(url.hash=="#vid")
+        vid();
+
     function intro() {
             hide();
             document.getElementById
@@ -265,6 +271,19 @@
                 ("iframe1").src = "contents/5-geo.html";
                 history.replaceState(null,null, window.location.pathname + "#geo");
       }
+      function tcam(){
+         hide();
+            document.getElementById
+                ("iframe1").src = "contents/6-cam.html";
+                history.replaceState(null,null, window.location.pathname + "#tcam");
+      }
+      function vid(){
+         hide();
+            document.getElementById
+                ("iframe1").src = "contents/7-video.html";
+                history.replaceState(null,null, window.location.pathname + "#vid");
+      }
+
 
   </script>
   <script src="script.js"></script>

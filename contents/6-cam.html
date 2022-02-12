@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+
+<style>
+body {
+    font-family: 'Open Sans';font-size: 18px;
+    text-align: justify;
+  	text-justify: inter-word;
+}
+    #contents{
+      display: none;
+    }
+    #loader{
+      position: absolute;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      width: 300px;
+      height: 100px;
+    }
+    #loader h3{
+      width: 400px;
+    }
+    .blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+body{
+	 padding: 2%;padding-right: 8%;padding-left: 8%;line-height: 1.6;
+}
+@media (max-width: 420px) { /*420px*/
+
+		img{
+			height: 50%;
+			width: 50%;
+		}
+		iframe{
+		width: 220px;
+		height:180px ;
+	}
+  body{
+    padding: 0.2%;
+    font-size: 14px;
+    padding-right: 	1%;
+	line-height: 1.6;
+    
+  }
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+	/* Optional: show position indicator in red
+	::-webkit-scrollbar-thumb {
+	    background: #FF0000;
+	}*/
+</style>
+  <script type="text/javascript">
+      window.onload=function(){
+        document.getElementById('loader').style.display= "none";
+        document.getElementById('contents').style.display= "block";
+      }
+  </script>
+	<title></title>
+</head>
+<!-- <body style="overflow: hidden; "> -->
+<body>
+
+	<div id="loader">
+		<h3 style="margin-left: 0px;" class="blink_me">Please hold on for a moment...</h3>
+	</div>
+		<div id="contents">
+	<p>
+		<h2>Setting Camera Parameters OpenCV/Python. </h2>
+		The following sample OpenCV python code explain how to open the device video node, set the resolution, grab the frame and then display the frame in preview window.<br><br>
+		1. Import the OpenCV python package <br><Br>
+
+		<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border:solid black;border-width:.1em .1em .1em .1em;padding:.2em .1em;"><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+</pre></div><br><br>
+
+		2. Open the camera video node<br><Br>
+		<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border:solid black;border-width:.1em .1em .1em .1em;padding:.2em .1em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-style: italic; background-color: #0f140f"># Open the device at the ID 0</span>
+<span style="color: #ffffff">cap</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.VideoCapture(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f">#Check whether user selected camera is opened successfully.</span>
+
+<span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">not</span> <span style="color: #ffffff">(cap.isOpened()):</span>
+
+<span style="color: #ffffff">print("Could</span> <span style="color: #ffffff">not</span> <span style="color: #ffffff">open</span> <span style="color: #ffffff">video</span> <span style="color: #ffffff">device")</span>
+</pre></div>
+<br><Br>
+
+		3. Set the resolution of the camera by using OpenCV camera control properties<br><br>
+		<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border:solid black;border-width:.1em .1em .1em .1em;padding:.2em .1em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-style: italic; background-color: #0f140f">#To set the resolution</span>
+<span style="color: #ffffff">cap.set(cv2.cv.CV_CAP_PROP_FRAME_WIDTH,</span> <span style="color: #0086f7; font-weight: bold">640</span><span style="color: #ffffff">)</span>
+
+<span style="color: #ffffff">cap.set(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT,</span> <span style="color: #0086f7; font-weight: bold">480</span><span style="color: #ffffff">)</span>
+</pre></div>
+<br><Br>
+		4. Grab the frame continuously from the camera and show it in the preview window using the while loop. The 'q' key breaks the loop and exit the application.
+		<br><br>
+		<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border:solid black;border-width:.1em .1em .1em .1em;padding:.2em .1em;"><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">while</span><span style="color: #ffffff">(</span><span style="color: #fb660a; font-weight: bold">True</span><span style="color: #ffffff">):</span>
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># Capture frame-by-frame</span>
+
+<span style="color: #ffffff">ret,</span> <span style="color: #ffffff">frame</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cap.read()</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># Display the resulting frame</span>
+
+<span style="color: #ffffff">cv2.imshow(‘preview’,frame)</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f">#Waits for a user input to quit the application</span>
+
+<span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">)</span> <span style="color: #ffffff">&amp;</span> <span style="color: #0086f7; font-weight: bold">0xFF</span> <span style="color: #ffffff">==</span> <span style="color: #ffffff">ord(‘q’):</span>
+
+<span style="color: #fb660a; font-weight: bold">break</span>
+</pre></div>
+<br><br>
+		5. Release the camera, then close all of the imshow() windows.<br><br>
+		<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border:solid black;border-width:.1em .1em .1em .1em;padding:.2em .1em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-style: italic; background-color: #0f140f"># When everything done, release the capture</span>
+<span style="color: #ffffff">cap.release()</span>
+
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></div>
+<br><br>
+
+	<b>Complete code: <a href="1-cam.html">Live demo</a></b><br><br>
+	<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border:solid black;border-width:.1em .1em .1em .1em;padding:.2em .1em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># Open the device at the ID 0</span>
+
+<span style="color: #ffffff">cap</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.VideoCapture(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f">#Check whether user selected camera is opened successfully.</span>
+
+<span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">not</span> <span style="color: #ffffff">(cap.isOpened()):</span>
+
+<span style="color: #ffffff">print(“Could</span> <span style="color: #ffffff">not</span> <span style="color: #ffffff">open</span> <span style="color: #ffffff">video</span> <span style="color: #ffffff">device”)</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f">#To set the resolution</span>
+
+<span style="color: #ffffff">cap.set(cv2.cv.CV_CAP_PROP_FRAME_WIDTH,</span> <span style="color: #0086f7; font-weight: bold">640</span><span style="color: #ffffff">)</span>
+
+<span style="color: #ffffff">cap.set(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT,</span> <span style="color: #0086f7; font-weight: bold">480</span><span style="color: #ffffff">)</span>
+
+<span style="color: #fb660a; font-weight: bold">while</span><span style="color: #ffffff">(</span><span style="color: #fb660a; font-weight: bold">True</span><span style="color: #ffffff">):</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># Capture frame-by-frame</span>
+
+<span style="color: #ffffff">ret,</span> <span style="color: #ffffff">frame</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cap.read()</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># Display the resulting frame</span>
+
+<span style="color: #ffffff">cv2.imshow(‘preview’,frame)</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f">#Waits for a user input to quit the application</span>
+
+<span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">)</span> <span style="color: #ffffff">&amp;</span> <span style="color: #0086f7; font-weight: bold">0xFF</span> <span style="color: #ffffff">==</span> <span style="color: #ffffff">ord(‘q’):</span>
+
+<span style="color: #fb660a; font-weight: bold">break</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># When everything done, release the capture</span>
+
+<span style="color: #ffffff">cap.release()</span>
+
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+
+	</p>
+		<br>
+		<br><h3> Videos</h3>
+		<iframe width="320" height="215"
+src="https://www.youtube.com/embed/IvdYyHhUtXQ">
+</iframe>
+	</p>
+</div><br><br><br><br><br><br><br><br>
+</body>
+</html>
