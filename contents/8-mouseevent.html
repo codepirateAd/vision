@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+
+<style>
+body {
+    font-family: 'Open Sans';font-size: 18px;
+    text-align: justify;
+  	text-justify: inter-word;
+}
+    #contents{
+      display: none;
+    }
+    #loader{
+      position: absolute;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      width: 300px;
+      height: 100px;
+    }
+    #loader h3{
+      width: 400px;
+    }
+    .blink_me {
+  animation: blinker 1s linear infinite;
+}
+button:hover{
+    background: white;
+    color: black;
+}
+#output1{
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+
+#output2{
+    width: 258px;
+    background-color: black;
+    color: white;
+}
+#opd{
+    width: 350px;
+    border: 1px solid black;
+}
+button{
+    padding: 8px;
+    background: black;
+    color: white;
+    font-size: 16px;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+#outframe{
+
+     display: block; 
+     border: 1px solid black;
+     width: 198px;
+}
+#outframe1{
+
+     display: block; 
+     width: 278px;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+body{
+	 padding: 2%;padding-right: 8%;padding-left: 8%;line-height: 1.6;
+}
+@media (max-width: 420px) { /*420px*/
+    button{
+        font-size: 12px;
+    }
+
+#opd{
+    width: 250px;
+
+}
+		iframe{
+		width: 220px;
+		height:180px ;
+	}
+  body{
+    padding: 0.2%;
+    font-size: 14px;
+    padding-right: 	1%;
+	line-height: 1.6;
+    
+  }
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+	/* Optional: show position indicator in red
+	::-webkit-scrollbar-thumb {
+	    background: #FF0000;
+	}*/
+</style>
+  <script type="text/javascript">
+      window.onload=function(){
+        document.getElementById('loader').style.display= "none";
+        document.getElementById('contents').style.display= "block";
+      }
+  </script>
+	<title></title>
+</head>
+<!-- <body style="overflow: hidden; "> -->
+<body>
+
+	<div id="loader">
+		<h3 style="margin-left: 0px;" class="blink_me">Please hold on for a moment...</h3>
+	</div>
+		<div id="contents">
+	<p>
+		<h2>Handle Mouse Events in OpenCV</h2>
+        OpenCV sometimes helps to control and manage different types of mouse events and gives us the flexibility to manage them. There can be different types of mouse events such as left button click, right button click, double_click, etc. To manage these events we need to design callback functions for each type of mouse click event while the window or frame is opened by OpenCV.<br><br>The callback function will be helpful to implement what type of functionality you want with a particular mouse click event.
+        OpenCV have various features plugged into it. One of the features includes Mouse Events. There are different types of mouse events sucj as left button click, right button click, double click, etc. We can run the following code to list out all the different events:<br><br>
+        <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border:solid black;border-width:.1em .1em .1em .1em;padding:.2em .1em;"><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+<span style="color: #ffffff">events</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">[</span> <span style="color: #ffffff">i</span> <span style="color: #fb660a; font-weight: bold">for</span> <span style="color: #ffffff">i</span> <span style="color: #ffffff">in</span> <span style="color: #ffffff">dir(cv2)</span> <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #0086d2">&#39;EVENT&#39;</span> <span style="color: #ffffff">in</span> <span style="color: #ffffff">i]</span>
+<span style="color: #ffffff">print(events)</span>
+</pre></div><br><br>
+        Now lets write a program to interact with left click and right click of a mouse. The following program displays the coordinates of the image when right mouse button is clicked. When left mouse button is clicked it displays the color of that particular coordinates.<br><Br>
+        <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border:solid black;border-width:.1em .1em .1em .1em;padding:.2em .1em;"><table><tr><td><pre style="margin: 0; line-height: 125%; color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+
+<span style="color: #fb660a; font-weight: bold">def</span> <span style="color: #ff0086; font-weight: bold">click_event</span><span style="color: #ffffff">(event,</span> <span style="color: #ffffff">x,</span> <span style="color: #ffffff">y,</span> <span style="color: #ffffff">flags,</span> <span style="color: #ffffff">param):</span>
+    <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">event</span> <span style="color: #ffffff">==</span> <span style="color: #ffffff">cv2.EVENT_LBUTTONDOWN:</span>
+        <span style="color: #ffffff">print(</span><span style="color: #0086d2">&quot;(&quot;</span><span style="color: #ffffff">+str(x),</span><span style="color: #0086d2">&quot;,&quot;</span><span style="color: #ffffff">,str(y),</span><span style="color: #0086d2">&quot;)&quot;</span><span style="color: #ffffff">)</span>
+        <span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&#39;image&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">img)</span>
+
+    <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">event</span> <span style="color: #ffffff">==</span> <span style="color: #ffffff">cv2.EVENT_RBUTTONDOWN:</span>
+        <span style="color: #ffffff">blue</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">img[y,</span> <span style="color: #ffffff">x,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">]</span>
+        <span style="color: #ffffff">green</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">img[y,</span> <span style="color: #ffffff">x,</span> <span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">]</span>
+        <span style="color: #ffffff">red</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">img[y,</span> <span style="color: #ffffff">x,</span> <span style="color: #0086f7; font-weight: bold">2</span><span style="color: #ffffff">]</span>
+        <span style="color: #ffffff">print(</span><span style="color: #0086d2">&quot;(&quot;</span><span style="color: #ffffff">+str(blue),</span><span style="color: #0086d2">&quot;,&quot;</span><span style="color: #ffffff">,str(green),</span><span style="color: #0086d2">&quot;,&quot;</span><span style="color: #ffffff">,str(red),</span><span style="color: #0086d2">&quot;)&quot;</span><span style="color: #ffffff">)</span>
+        <span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&#39;image&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">img)</span>
+
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.imread(</span><span style="color: #0086d2">&#39;tomatoes.jpg&#39;</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&#39;image&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">img)</span>
+
+<span style="color: #ffffff">cv2.setMouseCallback(</span><span style="color: #0086d2">&#39;image&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">click_event)</span>
+
+<span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+
+<br>When the different coordinates is clicked on the output frame the coordinates are displayed in the terminal as shown below. If the output contains two parameters it means it is the coordinates (x,y) and if the output contains three parameters it means it is the colour values in the form of (b,g,r).<br><br>
+    <div id="output1" style="padding:10px;"><span id="output123"> <span style="color: lightgreen;">codepirate:<span style="color: blue;">~</span>$</span> python prog.py</span><br>
+    <span>(328,120)</span><br>
+    <span>(255,255,255)</span><br>
+    <span>(200,21,255)</span><br>
+    <span>(325,208)</span><br>
+    <span>(333,59)</span><br>
+    </div><br><br>
+
+    Now let us print the coordinates and the bgr colour values directly onto to frame itself. The following code the coordinates of the mouse is printed on the frame in blue colour and the bgr colour is displayed with yellow colour.<br><br>
+    <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border:solid black;border-width:.1em .1em .1em .1em;padding:.2em .1em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+  
+<span style="color: #fb660a; font-weight: bold">def</span> <span style="color: #ff0086; font-weight: bold">click_event</span><span style="color: #ffffff">(event,</span> <span style="color: #ffffff">x,</span> <span style="color: #ffffff">y,</span> <span style="color: #ffffff">flags,</span> <span style="color: #ffffff">param):</span>
+    <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">event</span> <span style="color: #ffffff">==</span> <span style="color: #ffffff">cv2.EVENT_LBUTTONDOWN:</span>
+        <span style="color: #ffffff">print(</span><span style="color: #0086d2">&quot;(&quot;</span><span style="color: #ffffff">+str(x),</span><span style="color: #0086d2">&quot;,&quot;</span><span style="color: #ffffff">,str(y),</span><span style="color: #0086d2">&quot;)&quot;</span><span style="color: #ffffff">)</span>
+        <span style="color: #ffffff">font</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.FONT_HERSHEY_SIMPLEX</span>
+        <span style="color: #ffffff">strXY</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">str(x)</span> <span style="color: #ffffff">+</span> <span style="color: #0086d2">&#39;, &#39;</span><span style="color: #ffffff">+</span> <span style="color: #ffffff">str(y)</span>
+        <span style="color: #ffffff">cv2.putText(img,</span> <span style="color: #ffffff">strXY,</span> <span style="color: #ffffff">(x,</span> <span style="color: #ffffff">y),</span> <span style="color: #ffffff">font,</span> <span style="color: #ffffff">.</span><span style="color: #0086f7; font-weight: bold">5</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">),</span> <span style="color: #0086f7; font-weight: bold">2</span><span style="color: #ffffff">)</span>
+        <span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&#39;Canvas&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">img)</span>
+
+    <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">event</span> <span style="color: #ffffff">==</span> <span style="color: #ffffff">cv2.EVENT_RBUTTONDOWN:</span>
+        <span style="color: #ffffff">blue</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">img[y,</span> <span style="color: #ffffff">x,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">]</span>
+        <span style="color: #ffffff">green</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">img[y,</span> <span style="color: #ffffff">x,</span> <span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">]</span>
+        <span style="color: #ffffff">red</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">img[y,</span> <span style="color: #ffffff">x,</span> <span style="color: #0086f7; font-weight: bold">2</span><span style="color: #ffffff">]</span>
+        <span style="color: #ffffff">font</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.FONT_HERSHEY_SIMPLEX</span>
+        <span style="color: #ffffff">strBGR</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">str(blue)</span> <span style="color: #ffffff">+</span> <span style="color: #0086d2">&#39;, &#39;</span><span style="color: #ffffff">+</span> <span style="color: #ffffff">str(green)+</span> <span style="color: #0086d2">&#39;, &#39;</span><span style="color: #ffffff">+</span> <span style="color: #ffffff">str(red)</span>
+        <span style="color: #ffffff">print(</span><span style="color: #0086d2">&quot;(&quot;</span><span style="color: #ffffff">+str(blue),</span><span style="color: #0086d2">&quot;,&quot;</span><span style="color: #ffffff">,str(green),</span><span style="color: #0086d2">&quot;,&quot;</span><span style="color: #ffffff">,str(red),</span><span style="color: #0086d2">&quot;)&quot;</span><span style="color: #ffffff">)</span>
+        <span style="color: #ffffff">cv2.putText(img,</span> <span style="color: #ffffff">strBGR,</span> <span style="color: #ffffff">(x,</span> <span style="color: #ffffff">y),</span> <span style="color: #ffffff">font,</span> <span style="color: #ffffff">.</span><span style="color: #0086f7; font-weight: bold">5</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">),</span> <span style="color: #0086f7; font-weight: bold">2</span><span style="color: #ffffff">)</span>
+        <span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&#39;Canvas&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">img)</span>
+
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.imread(</span><span style="color: #0086d2">&#39;tomatoes.jpg&#39;</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&#39;Canvas&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">img)</span>
+
+<span style="color: #ffffff">cv2.setMouseCallback(</span><span style="color: #0086d2">&#39;Canvas&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">click_event)</span>
+
+<span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div><br><br>
+    
+    <h4>Output</h4>
+        <img id="opd" src="../image/opd11.png">
+        <br><Br>
+
+
+    <h4>Demo </h4>
+    Click any points inside the frame, right-click will display the coordinates and left click will display the bgr value of the coordinates.
+    <br><br>
+
+        <img src="../image/opd9.png" id="outframe">
+        <canvas oncontextmenu="return false;" width="200" height="200"
+        style="background-color: black">
+</div>
+    <h4>Output Terminal:&nbsp;&nbsp;&nbsp; <button id="reset">Reset</button></h4>
+    <img src="../image/opd10.png" id="outframe1">
+    <div id="output2" style="padding:10px;"><span id="output"> <span style="color: green;">codepirate:<span style="color: blue;">~</span>$</span> python prog.py</span></div>
+  
+    <script type="text/javascript">
+        const btn = document.getElementById("reset");
+
+        function getMousePosition(canvas, event) {
+            let rect = canvas.getBoundingClientRect();
+            let x = event.clientX - rect.left;
+            let y = event.clientY - rect.top;
+            document.getElementById("output").innerHTML +="<br>&nbsp;"+ "("+parseInt(x+1)+", "+parseInt(y+1)+")";
+        }
+      
+        function getColor(canvas, event) {
+            document.getElementById("output").innerHTML +="<br>&nbsp;"+  "(0,0,0)";
+        }
+        let canvasElem = document.querySelector("canvas");
+          
+        canvasElem.addEventListener("mousedown", function(e)
+        {   
+            
+            if(event.button==0)
+                getMousePosition(canvasElem, e);
+            else 
+                getColor(canvasElem, e);
+
+        });
+
+        btn.addEventListener("click", function() {
+        document.getElementById("output").innerHTML = "<span style='color: green;'>codepirate:<span style='color: blue;'>~</span>$</span> python prog.py";
+});
+
+    </script>
+		<br>
+		<br><h3> Videos</h3>
+		<iframe width="320" height="215" src="https://www.youtube.com/embed/IlRXaU6E4MA">
+</iframe>
+	</p>
+</div><br><br><br><br><br><br><br><br>
+</body>
+</html>

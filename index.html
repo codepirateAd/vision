@@ -101,6 +101,7 @@
           <li><a href="javascript:geo()">Draw geometric shape</a></li>
           <li><a href="javascript:tcam()">Camera Parameters</a></li>
           <li><a href="javascript:vid()">Working with videos</a></li>
+          <li><a href="javascript:mouseevent()">Mouse Events</a></li>
         </ul>
       </li>
       <li>
@@ -223,6 +224,8 @@
         tcam();
       else if(url.hash=="#vid")
         vid();
+      else if(url.hash=="#mouseevent")
+        mouseevent();
 
     function intro() {
             hide();
@@ -283,7 +286,12 @@
                 ("iframe1").src = "contents/7-video.html";
                 history.replaceState(null,null, window.location.pathname + "#vid");
       }
-
+      function mouseevent(){
+        hide();
+            document.getElementById
+                ("iframe1").src = "contents/8-mouseevent.html";
+                history.replaceState(null,null, window.location.pathname + "#mouseevent");
+      }
 
   </script>
   <script src="script.js"></script>
