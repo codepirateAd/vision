@@ -134,7 +134,7 @@ html {
 <span style="color: #ffffff">print(events)</span>
 </pre></div><br><br>
         Now lets write a program to interact with left click and right click of a mouse. The following program displays the coordinates of the image when right mouse button is clicked. When left mouse button is clicked it displays the color of that particular coordinates.<br><Br>
-        <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border:solid black;border-width:.1em .1em .1em .1em;padding:.2em .1em;"><table><tr><td><pre style="margin: 0; line-height: 125%; color: gray;"> 1
+       <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border:solid black;border-width:.1em .1em .1em .1em;padding:.2em .1em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
  2
  3
  4
@@ -154,14 +154,22 @@ html {
 18
 19
 20
-21</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+21
+22
+23
+24
+25</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
 
+<span style="color: #008800; font-style: italic; background-color: #0f140f">#x,y coordinates of the mouse</span>
 <span style="color: #fb660a; font-weight: bold">def</span> <span style="color: #ff0086; font-weight: bold">click_event</span><span style="color: #ffffff">(event,</span> <span style="color: #ffffff">x,</span> <span style="color: #ffffff">y,</span> <span style="color: #ffffff">flags,</span> <span style="color: #ffffff">param):</span>
+    <span style="color: #008800; font-style: italic; background-color: #0f140f">#check left mouse click</span>
     <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">event</span> <span style="color: #ffffff">==</span> <span style="color: #ffffff">cv2.EVENT_LBUTTONDOWN:</span>
         <span style="color: #ffffff">print(</span><span style="color: #0086d2">&quot;(&quot;</span><span style="color: #ffffff">+str(x),</span><span style="color: #0086d2">&quot;,&quot;</span><span style="color: #ffffff">,str(y),</span><span style="color: #0086d2">&quot;)&quot;</span><span style="color: #ffffff">)</span>
         <span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&#39;image&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">img)</span>
-
+    
+    <span style="color: #008800; font-style: italic; background-color: #0f140f">#check right mouse click</span>
     <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">event</span> <span style="color: #ffffff">==</span> <span style="color: #ffffff">cv2.EVENT_RBUTTONDOWN:</span>
+        <span style="color: #008800; font-style: italic; background-color: #0f140f">#get bgr values</span>
         <span style="color: #ffffff">blue</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">img[y,</span> <span style="color: #ffffff">x,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">]</span>
         <span style="color: #ffffff">green</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">img[y,</span> <span style="color: #ffffff">x,</span> <span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">]</span>
         <span style="color: #ffffff">red</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">img[y,</span> <span style="color: #ffffff">x,</span> <span style="color: #0086f7; font-weight: bold">2</span><span style="color: #ffffff">]</span>
@@ -177,6 +185,8 @@ html {
 <span style="color: #ffffff">cv2.destroyAllWindows()</span>
 </pre></td></tr></table></div>
 
+
+
 <br>When the different coordinates is clicked on the output frame the coordinates are displayed in the terminal as shown below. If the output contains two parameters it means it is the coordinates (x,y) and if the output contains three parameters it means it is the colour values in the form of (b,g,r).<br><br>
     <div id="output1" style="padding:10px;"><span id="output123"> <span style="color: lightgreen;">codepirate:<span style="color: blue;">~</span>$</span> python prog.py</span><br>
     <span>(328,120)</span><br>
@@ -187,7 +197,7 @@ html {
     </div><br><br>
 
     Now let us print the coordinates and the bgr colour values directly onto to frame itself. The following code the coordinates of the mouse is printed on the frame in blue colour and the bgr colour is displayed with yellow colour.<br><br>
-    <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border:solid black;border-width:.1em .1em .1em .1em;padding:.2em .1em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+   <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border:solid black;border-width:.1em .1em .1em .1em;padding:.2em .1em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
  2
  3
  4
@@ -213,21 +223,39 @@ html {
 24
 25
 26
-27</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
   
 <span style="color: #fb660a; font-weight: bold">def</span> <span style="color: #ff0086; font-weight: bold">click_event</span><span style="color: #ffffff">(event,</span> <span style="color: #ffffff">x,</span> <span style="color: #ffffff">y,</span> <span style="color: #ffffff">flags,</span> <span style="color: #ffffff">param):</span>
+    <span style="color: #008800; font-style: italic; background-color: #0f140f">#check left mouse click</span>
     <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">event</span> <span style="color: #ffffff">==</span> <span style="color: #ffffff">cv2.EVENT_LBUTTONDOWN:</span>
         <span style="color: #ffffff">print(</span><span style="color: #0086d2">&quot;(&quot;</span><span style="color: #ffffff">+str(x),</span><span style="color: #0086d2">&quot;,&quot;</span><span style="color: #ffffff">,str(y),</span><span style="color: #0086d2">&quot;)&quot;</span><span style="color: #ffffff">)</span>
         <span style="color: #ffffff">font</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.FONT_HERSHEY_SIMPLEX</span>
         <span style="color: #ffffff">strXY</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">str(x)</span> <span style="color: #ffffff">+</span> <span style="color: #0086d2">&#39;, &#39;</span><span style="color: #ffffff">+</span> <span style="color: #ffffff">str(y)</span>
+
+        <span style="color: #008800; font-style: italic; background-color: #0f140f">#Display coordinates</span>
         <span style="color: #ffffff">cv2.putText(img,</span> <span style="color: #ffffff">strXY,</span> <span style="color: #ffffff">(x,</span> <span style="color: #ffffff">y),</span> <span style="color: #ffffff">font,</span> <span style="color: #ffffff">.</span><span style="color: #0086f7; font-weight: bold">5</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">),</span> <span style="color: #0086f7; font-weight: bold">2</span><span style="color: #ffffff">)</span>
         <span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&#39;Canvas&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">img)</span>
 
+    <span style="color: #008800; font-style: italic; background-color: #0f140f">#check right mouse click</span>
     <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">event</span> <span style="color: #ffffff">==</span> <span style="color: #ffffff">cv2.EVENT_RBUTTONDOWN:</span>
+        <span style="color: #008800; font-style: italic; background-color: #0f140f"># get bgr value</span>
         <span style="color: #ffffff">blue</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">img[y,</span> <span style="color: #ffffff">x,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">]</span>
         <span style="color: #ffffff">green</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">img[y,</span> <span style="color: #ffffff">x,</span> <span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">]</span>
         <span style="color: #ffffff">red</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">img[y,</span> <span style="color: #ffffff">x,</span> <span style="color: #0086f7; font-weight: bold">2</span><span style="color: #ffffff">]</span>
+
+        <span style="color: #008800; font-style: italic; background-color: #0f140f">#set font style</span>
         <span style="color: #ffffff">font</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.FONT_HERSHEY_SIMPLEX</span>
+
+        <span style="color: #008800; font-style: italic; background-color: #0f140f">#display onto the canvas</span>
         <span style="color: #ffffff">strBGR</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">str(blue)</span> <span style="color: #ffffff">+</span> <span style="color: #0086d2">&#39;, &#39;</span><span style="color: #ffffff">+</span> <span style="color: #ffffff">str(green)+</span> <span style="color: #0086d2">&#39;, &#39;</span><span style="color: #ffffff">+</span> <span style="color: #ffffff">str(red)</span>
         <span style="color: #ffffff">print(</span><span style="color: #0086d2">&quot;(&quot;</span><span style="color: #ffffff">+str(blue),</span><span style="color: #0086d2">&quot;,&quot;</span><span style="color: #ffffff">,str(green),</span><span style="color: #0086d2">&quot;,&quot;</span><span style="color: #ffffff">,str(red),</span><span style="color: #0086d2">&quot;)&quot;</span><span style="color: #ffffff">)</span>
         <span style="color: #ffffff">cv2.putText(img,</span> <span style="color: #ffffff">strBGR,</span> <span style="color: #ffffff">(x,</span> <span style="color: #ffffff">y),</span> <span style="color: #ffffff">font,</span> <span style="color: #ffffff">.</span><span style="color: #0086f7; font-weight: bold">5</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">),</span> <span style="color: #0086f7; font-weight: bold">2</span><span style="color: #ffffff">)</span>
@@ -240,7 +268,8 @@ html {
 
 <span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
 <span style="color: #ffffff">cv2.destroyAllWindows()</span>
-</pre></td></tr></table></div><br><br>
+</pre></td></tr></table></div>
+<br><br>
     
     <h4>Output</h4>
         <img id="opd" src="../image/opd11.png">
