@@ -116,6 +116,7 @@
           <li><a class="link_name" href="#">Camera Module</a></li>
           <li><a href="javascript:cam()">Video Capture</a></li> <!-- javascript:cam() -->
           <li><a href="javascript:cam2()">Convert to Gray Scale</a></li>
+          <li><a href="javascript:cam3()">Motion Detection</a></li>
           <!-- <li><a href="cgrayconvert.html" target="iframe1">Gray Scale</a></li> -->
           <!-- <li><a href="#">Face Detection</a></li> -->
           <!-- <li><a href="#">Motion Detection</a></li> -->
@@ -226,6 +227,8 @@
         vid();
       else if(url.hash=="#mouseevent")
         mouseevent();
+      else if(url.hash=="#motiondetection")
+        cam3();
 
     function intro() {
             hide();
@@ -256,6 +259,14 @@
                 history.replaceState(null,null, window.location.pathname + "#grayscale");
 
         }
+      function cam3() {
+            hide();
+            document.getElementById
+                ("iframe1").src = "contents/3-motion.html";
+                history.replaceState(null,null, window.location.pathname + "#motiondetection");
+
+        }
+
       function rdw(){
          hide();
             document.getElementById
