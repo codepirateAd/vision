@@ -75,9 +75,9 @@
 
     <ul class="nav-links">
       <li>
-        <a href="#">
+        <a href="index.html">
           <i class='bx bx-grid-alt' ></i>
-          <span class="link_name" href="#">Dashboard</span>
+          <span class="link_name">Dashboard</span>
         </a>
         <ul class="sub-menu blank">
           <li><a class="link_name" href="index.html">Dashboard</a></li>
@@ -117,6 +117,7 @@
           <li><a href="javascript:cam()">Video Capture</a></li> <!-- javascript:cam() -->
           <li><a href="javascript:cam2()">Convert to Gray Scale</a></li>
           <li><a href="javascript:cam3()">Motion Detection</a></li>
+          <li><a href="javascript:cam4()">Challenge Project #1</a></li>
           <!-- <li><a href="cgrayconvert.html" target="iframe1">Gray Scale</a></li> -->
           <!-- <li><a href="#">Face Detection</a></li> -->
           <!-- <li><a href="#">Motion Detection</a></li> -->
@@ -229,9 +230,13 @@
         mouseevent();
       else if(url.hash=="#motiondetection")
         cam3();
-      else if(url.hash=="#about"){
+      else if(url.hash=="#about")
         about();
-      }
+      else if(url.hash=="#red-light-green-light")
+        cam4();
+      else if(url.hash=="#red-light-green-light-play")
+        load_game();
+
     function intro() {
             hide();
             document.getElementById
@@ -310,6 +315,19 @@
             document.getElementById
                 ("iframe1").src = "contents/about.html";
                 history.replaceState(null,null, window.location.pathname + "#about");
+      }
+      function cam4(){
+        hide();
+            document.getElementById
+                ("iframe1").src = "contents/4-challenge.html";
+                history.replaceState(null,null, window.location.pathname + "#red-light-green-light");
+        
+      }
+      function load_game(){
+         hide();
+            document.getElementById
+                ("iframe1").src = "contents/challenge1.html";
+                history.replaceState(null,null, window.location.pathname + "#red-light-green-light-play");
       }
 
   </script>
