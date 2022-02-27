@@ -30,6 +30,7 @@ function activate() {
 
 function notactivate(){
 	isActivated = false;
+	if(!dead)
 	play('activated');
 }
 
@@ -136,7 +137,7 @@ function myStopFunction() {
 	$motionBox.hide();
 	pause('i-see-you');
 	pause('activated');
-
+	dead = true;
 	DiffCamEngine.stop();
 
 }
