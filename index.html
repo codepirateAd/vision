@@ -134,12 +134,12 @@
      
       <li>
         <div class="iocn-link">
-          <a href="#">
+          <a href="javascript:about()">
             <i class='bx bxs-user-pin'></i>
             <span class="link_name">About Us</span>
           </a>
            <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">About Us</a></li>
+          <li><a class="link_name" href="javascript:about()">About Us</a></li>
         </ul>
         </div>
       </li>
@@ -229,7 +229,9 @@
         mouseevent();
       else if(url.hash=="#motiondetection")
         cam3();
-
+      else if(url.hash=="#about"){
+        about();
+      }
     function intro() {
             hide();
             document.getElementById
@@ -302,6 +304,12 @@
             document.getElementById
                 ("iframe1").src = "contents/8-mouseevent.html";
                 history.replaceState(null,null, window.location.pathname + "#mouseevent");
+      }
+      function about(){
+        hide();
+            document.getElementById
+                ("iframe1").src = "contents/about.html";
+                history.replaceState(null,null, window.location.pathname + "#about");
       }
 
   </script>
