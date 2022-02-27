@@ -135,6 +135,7 @@ function capture(payload) {
 function myStopFunction() {
 	$motionBox.hide();
 	pause('i-see-you');
+	pause('activated');
 
 	DiffCamEngine.stop();
 
