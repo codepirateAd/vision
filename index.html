@@ -9,8 +9,15 @@
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <style type="text/css">
-    body,html{ height: 100%; margin:0; padding:0; overflow:hidden; }
-
+    html{ height: 100%; margin:0; padding:0; overflow:hidden; }
+body {
+    font-family: 'Open Sans';font-size: 18px;
+    text-align: justify;
+ 
+}
+#maincontent{
+  text-justify: inter-word;
+}
 
     #contents{
       display: none;
@@ -119,7 +126,7 @@
           <li><a href="javascript:cam2()">Convert to Gray Scale</a></li>
           <li><a href="javascript:cam3()">Motion Detection</a></li>
           <li><a href="javascript:cam4()">Challenge Project #1</a></li>
-          <!-- <li><a href="cgrayconvert.html" target="iframe1">Gray Scale</a></li> -->
+          <li><a href="javascript:load_face_detect()">Face Detection</a></li>
           <!-- <li><a href="#">Face Detection</a></li> -->
           <!-- <li><a href="#">Motion Detection</a></li> -->
         </ul>
@@ -176,25 +183,48 @@
     <center><h1> Vision</h1>
     </center>
     <hr>
-    <section id="displaycontent" style="  float: left;
+    <section id="displaycontent" style=";
     position: relative;
-    left: 50%;">
+    left: 50%;  
+    padding-right: 8%;padding-left: 2%;
+    line-height: 1.6;
+font-family: 'Open Sans';font-size: 18px;
+    "
+
+    >
   
 
-      <!-- <div style="float: left;
+      <div style="
       position: relative;
-      left: -50%;">
-    <h2> Contents </h2>
+      left: -50%;
+      line-height: 1.6;">
+    <!-- <h2> Contents </h2> -->
     <br>
-    <h4>Compute Vision</h4>
-      <a href="javascript:intro()" id="intro">Introduction</a><br>
-      <a href="javascript:env()" id="env">Environment setup</a><br>
+    <h4 id="maincontent"></h4>
+    <p >
+      Vision is a web-based learning platform where students across the globe can learn the 
+computer vision library i.e. OpenCV. Vision platform contains all the information about 
+computer vision and OpenCV.The Webpages contains the code for the particular branch of 
+Computer Vision which can be tested directly on the website without the need of copying the 
+entire code to a local system.<!--  The website also contains some projects including face 
+detection, face recognition, object recognition and emotion detection. This website is a simple 
+and efficient way of learning and executing Open CV codes without the need of any software 
+to be installed to a local system.
+The website provides all the needed codes and all the detailed description of the code, and it 
+also has video tutorials to watch and learn and execute the code efficiently. And anyone can 
+contact our teachers who will help you if you are stuck with any problems as this will create a 
+interactive learning experience to the student.
+Because of the main stream use of AI on camera is booming, examples like AI controlled car, 
+Security camera, applications such as face detection, video capturing, tracking moving
+objects, object disclosure, nowadays in Covid applications such as face mask detection, social 
+distancing, and many more. -->
+</p>
     <br>
-
+<!-- 
     <h4>Camera Module</h4>
       <a href="javascript:cam()" id="videocapture">Video Capture</a><br>
-      <a href="javascript:cam2()" id="grayscale">Convert to Grey Scale</a><Br>
-  </div> -->
+      <a href="javascript:cam2()" id="grayscale">Convert to Grey Scale</a><Br> -->
+  </div>
   </section>
     <iframe name="iframe1" 
               style="position:relative; border:0; height:100%; width:100%;"
@@ -237,6 +267,8 @@
         cam4();
       else if(url.hash=="#red-light-green-light-play")
         load_game();
+      else if(url.hash=="#faceDetect")
+        load_face_detect();
 
     function intro() {
             hide();
@@ -329,6 +361,12 @@
             document.getElementById
                 ("iframe1").src = "contents/challenge1.html";
                 history.replaceState(null,null, window.location.pathname + "#red-light-green-light-play");
+      }
+      function load_face_detect(){
+         hide();
+            document.getElementById
+                ("iframe1").src = "contents/5-faceDetect.html";
+                history.replaceState(null,null, window.location.pathname + "#faceDetect");
       }
 
   </script>
