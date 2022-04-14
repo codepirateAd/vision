@@ -272,7 +272,9 @@ distancing, and many more. -->
         load_face_detect();
       else if(url.hash=="#emotion-detector")
         cam5();
-
+      else if(url.hash=="#emotiondetectorplay")
+        load_emotion();
+        
     function intro() {
             hide();
             document.getElementById
@@ -365,6 +367,13 @@ distancing, and many more. -->
                 ("iframe1").src = "contents/challenge1.html";
                 history.replaceState(null,null, window.location.pathname + "#red-light-green-light-play");
       }
+      function load_emotion(){
+         hide();
+            document.getElementById
+                ("iframe1").src = "contents/challenge2.emotiondetector.html";
+                history.replaceState(null,null, window.location.pathname + "#emotiondetectorplay");
+      }
+
       function load_face_detect(){
          hide();
             document.getElementById
