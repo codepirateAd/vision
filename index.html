@@ -127,6 +127,7 @@ body {
           <li><a href="javascript:cam3()">Motion Detection</a></li>
           <li><a href="javascript:cam4()">Challenge Project #1</a></li>
           <li><a href="javascript:load_face_detect()">Face Detection</a></li>
+          <li><a href="javascript:cam5()">Challenge Project #2</a></li>
           <!-- <li><a href="#">Face Detection</a></li> -->
           <!-- <li><a href="#">Motion Detection</a></li> -->
         </ul>
@@ -183,7 +184,7 @@ body {
     <center><h1> Vision</h1>
     </center>
     <hr>
-    <section id="displaycontent" style=";
+    <section id="displaycontent" style="
     position: relative;
     left: 50%;  
     padding-right: 8%;padding-left: 2%;
@@ -269,6 +270,8 @@ distancing, and many more. -->
         load_game();
       else if(url.hash=="#faceDetect")
         load_face_detect();
+      else if(url.hash=="#emotion-detector")
+        cam5();
 
     function intro() {
             hide();
@@ -365,10 +368,17 @@ distancing, and many more. -->
       function load_face_detect(){
          hide();
             document.getElementById
-                ("iframe1").src = "contents/5-faceDetect.html";
+                ("iframe1").src = "contents/5-facedetection.html";
                 history.replaceState(null,null, window.location.pathname + "#faceDetect");
       }
-
+      function cam5(){
+        hide();
+            document.getElementById
+                ("iframe1").src = "contents/6-challenge.html";
+                history.replaceState(null,null, window.location.pathname + "#emotion-detector");
+        
+      }
+      
   </script>
   <script src="script.js"></script>
 

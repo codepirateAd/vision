@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+
+<style>
+body {
+    font-family: 'Open Sans';font-size: 18px;
+    text-align: justify;
+  	text-justify: inter-word;
+}
+    #contents{
+      display: none;
+    }
+    #loader{
+      position: absolute;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      width: 300px;
+      height: 100px;
+    }
+    #loader h3{
+      width: 400px;
+    }
+    .blink_me {
+  animation: blinker 1s linear infinite;
+}
+	#video{
+		display: none;
+    filter: grayscale(100%);
+
+	}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+body{
+	 padding: 2%;padding-right: 8%;padding-left: 8%;
+	 line-height: 1.6;
+}
+button{
+	padding: 8px;
+	background: black;
+	color: white;
+	font-size: 20px;
+	border: 1px solid black;
+	border-radius: 8px;
+}
+button:hover{
+	background: white;
+	color: black;
+}
+/*p{
+	line-height: 1.6;
+}*/
+@media (max-width: 420px) { /*420px*/
+	img{
+	    object-fit: scale-down;
+	    width: 50%;
+}
+#face{
+	height: 100%;
+	width: 100%;
+	overflow: none;
+}
+	#video{
+		height: 100%;
+		width: 100%;
+	}
+	button{
+		font-size: 16px;
+	}
+  body{
+    padding: 0.2%;
+    font-size: 14px;
+    padding-right: 	1%;
+    line-height: 1.6;
+  }
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}*/
+</style>
+  <script type="text/javascript">
+      window.onload=function(){
+        document.getElementById('loader').style.display= "none";
+        document.getElementById('contents').style.display= "block";
+      }
+  </script>
+	<title></title>
+</head>
+<!-- <body style="overflow: hidden; "> -->
+<body>
+
+	<div id="loader">
+		<h3 style="margin-left: 0px;" class="blink_me">Please hold on for a moment...</h3>
+	</div>
+		<div id="contents">
+	<p>
+		<h2>Face Detection using Haar-Cascade Classifier</h2>
+		<br>
+		A Haar-Cascade Classifier is a machine learning classifier that works with Haar features. It's embodied in the cv2.CascadeClassifier class. Several XML files come pre-packaged with OpenCV, each of which holds the Haar features for different objects. <br/><br/>
+		The features are calculated for many regions of an image, where the pixel intensities are summed, before a difference between these sums is computed. This downsampling of the image, leads to a simplified feature map that can be used to detect patterns in images.<br/><br/>
+
+
+		<h3> Download the xml files </h3>
+		You can download the xml files from <a href="https://github.com/codepirateAd/haarcascades"> here</a><br/><Br/>
+
+		<h3> Code </h3>
+		<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">from</span> <span style="color: #ffffff">__future__</span> <span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">print_function</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">cv</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">argparse</span>
+<span style="color: #fb660a; font-weight: bold">def</span> <span style="color: #ff0086; font-weight: bold">detectAndDisplay</span><span style="color: #ffffff">(frame):</span>
+    <span style="color: #ffffff">frame_gray</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.cvtColor(frame,</span> <span style="color: #ffffff">cv.COLOR_BGR2GRAY)</span>
+    <span style="color: #ffffff">frame_gray</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.equalizeHist(frame_gray)</span>
+    
+    <span style="color: #008800; font-style: italic; background-color: #0f140f"># Detect faces</span>
+    <span style="color: #ffffff">faces</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">face_cascade.detectMultiScale(frame_gray)</span>
+    <span style="color: #fb660a; font-weight: bold">for</span> <span style="color: #ffffff">(x,y,w,h)</span> <span style="color: #ffffff">in</span> <span style="color: #ffffff">faces:</span>
+        <span style="color: #ffffff">center</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">(x</span> <span style="color: #ffffff">+</span> <span style="color: #ffffff">w//</span><span style="color: #0086f7; font-weight: bold">2</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">y</span> <span style="color: #ffffff">+</span> <span style="color: #ffffff">h//</span><span style="color: #0086f7; font-weight: bold">2</span><span style="color: #ffffff">)</span>
+        <span style="color: #ffffff">frame</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.ellipse(frame,</span> <span style="color: #ffffff">center,</span> <span style="color: #ffffff">(w//</span><span style="color: #0086f7; font-weight: bold">2</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">h//</span><span style="color: #0086f7; font-weight: bold">2</span><span style="color: #ffffff">),</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">360</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">),</span> <span style="color: #0086f7; font-weight: bold">4</span><span style="color: #ffffff">)</span>
+        <span style="color: #ffffff">faceROI</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">frame_gray[y:y+h,x:x+w]</span>
+
+    <span style="color: #ffffff">cv.imshow(</span><span style="color: #0086d2">&#39;Capture - Face detection&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">frame)</span>
+<span style="color: #ffffff">parser</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">argparse.ArgumentParser(description=</span><span style="color: #0086d2">&#39;Code for Cascade Classifier tutorial.&#39;</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">parser.add_argument(</span><span style="color: #0086d2">&#39;--face_cascade&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">help=</span><span style="color: #0086d2">&#39;Path to face cascade.&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff"><br/>default=</span><span style="color: #0086d2">&#39;haarcascades/haarcascade_frontalface_alt.xml&#39;</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">parser.add_argument(</span><span style="color: #0086d2">&#39;--camera&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">help=</span><span style="color: #0086d2">&#39;Camera divide number.&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">type=int,</span> <span style="color: #ffffff">default=</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+
+<span style="color: #ffffff">args</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">parser.parse_args()</span>
+<span style="color: #ffffff">face_cascade_name</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">args.face_cascade</span>
+<span style="color: #ffffff">face_cascade</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.CascadeClassifier()</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># Load the cascades</span>
+<span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">not</span> <span style="color: #ffffff">face_cascade.load(cv.samples.findFile(face_cascade_name)):</span>
+    <span style="color: #fb660a; font-weight: bold">print</span><span style="color: #ffffff">(</span><span style="color: #0086d2">&#39;--(!)Error loading face cascade&#39;</span><span style="color: #ffffff">)</span>
+    <span style="color: #ffffff">exit(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+
+<span style="color: #ffffff">camera_device</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">args.camera</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># Read the video stream</span>
+<span style="color: #ffffff">cap</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.VideoCapture(camera_device)</span>
+<span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">not</span> <span style="color: #ffffff">cap.isOpened:</span>
+    <span style="color: #fb660a; font-weight: bold">print</span><span style="color: #ffffff">(</span><span style="color: #0086d2">&#39;--(!)Error opening video capture&#39;</span><span style="color: #ffffff">)</span>
+    <span style="color: #ffffff">exit(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #fb660a; font-weight: bold">while</span> <span style="color: #ffffff">True:</span>
+    <span style="color: #ffffff">ret,</span> <span style="color: #ffffff">frame</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cap.read()</span>
+    <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">frame</span> <span style="color: #ffffff">is</span> <span style="color: #ffffff">None:</span>
+        <span style="color: #fb660a; font-weight: bold">print</span><span style="color: #ffffff">(</span><span style="color: #0086d2">&#39;--(!) No captured frame -- Break!&#39;</span><span style="color: #ffffff">)</span>
+        <span style="color: #fb660a; font-weight: bold">break</span>
+    <span style="color: #ffffff">detectAndDisplay(frame)</span>
+    <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">cv.waitKey(</span><span style="color: #0086f7; font-weight: bold">10</span><span style="color: #ffffff">)</span> <span style="color: #ffffff">==</span> <span style="color: #0086f7; font-weight: bold">27</span><span style="color: #ffffff">:</span>
+        <span style="color: #fb660a; font-weight: bold">break</span>
+</pre></td></tr></table></div>
+
+<p><button id="btn">Test the code</button><br><br>
+	<canvas id="face" width="640" height="480" style="display:none"></canvas>
+	</p><br><br>
+	Here, we're greyscaling the image for the classifier to reduce the computational cost (more information means more computation). The colors don't matter too much for this detection, as the patterns that define eyes look pretty much the same whether they're colored or not.
+<br>
+The cascade_classifier is a CascadeClassifier instance, with loaded Haar features for eyes. We're dynamically locating the file through f-Strings!
+<br><br>
+The detectMultiScale() method is what does the actual detection and can detect the same object on an image, regardless of scale. It returns a list of the coordinates of the detected objects, in the form of rectangles (tuples). This makes it natural to outline them with, well, rectangles! For each tuple of (x, y, width, height) located in the detected_objects, we can draw a rectangle.
+<br>
+<br>
+The minSize argument defines the minimum size of an object to be considered. If you set the size to be really small, the classifier will likely pick up a lot of fake-positives on the image. This usually depends on the resolution of images you're working with and the average object size. In practice, it boils down to reasonably testing sizes until it performs well.
+</p>
+
+
+</div><br><br><br><br><br><br><br>
+
+<script type="text/javascript">
+	document.getElementById("btn").addEventListener("click", dis);
+	function dis(){
+		
+		if(document.getElementById("face").style.display !="block"){
+			document.getElementById("face").style.display="block";
+			var script = document.createElement('script');
+			script.setAttribute('type', 'text/javascript');
+			script.setAttribute('src', 'js/camvas.js');
+			document.head.appendChild(script);
+			var script = document.createElement('script');
+			script.setAttribute('type', 'text/javascript');
+			script.setAttribute('src', 'js/index.js');
+			document.head.appendChild(script);
+			var script = document.createElement('script');
+			script.setAttribute('type', 'text/javascript');
+			script.setAttribute('src', 'js/pico.js');
+			document.head.appendChild(script);
+			// 	if(navigator.mediaDevices.getUserMedia){
+				document.getElementById("btn").innerHTML ="Close Camera";
+
+    
+    }
+    else{
+    	// navigator.mediaDevices.getUserMedia({video: false})
+    	document.getElementById("face").style.display="none";
+    	window.location.reload();
+		document.getElementById("btn").innerHTML ="Test the code";
+
+    	}
+		}
+	 
+</script>
+</body>
+</html>
+<!-- <!DOCTYPE html>
+<html>
+    <head>
+		<title>Face detection</title>
+		<script src="./js/camvas.js"></script>
+		<script src="./js/pico.js"></script>
+        <script src="./js/index.js"></script>
+    </head>
+	<body>
+		
+    </body>
+</html> -->
