@@ -135,7 +135,198 @@ html {
     </div>
         <div id="contents">
     <p>
-        <h2>OpenCV Functions</h2>
+        <h2>Morphological Transformations</h2>
+        Morphological Transformations are some simple operations based on the image shape. Morphological transformation are normally performed on a binary image and when we perform Morphological transformation there are two things which are required.
+        <br/>First, the original image and a structuring element or a kernel which decides the nature of the operation. there are different type of morphological transformations and we are going to see them one by one.<Br/><Br/>
+        <h4>1. Erosion</h4>
+        The basic idea of erosion is just like soil erosion only, it erodes away the boundaries of foreground object (Always try to keep foreground in white). So what it does? The kernel slides through the image (as in 2D convolution). A pixel in the original image (either 1 or 0) will be considered 1 only if all the pixels under the kernel is 1, otherwise it is eroded (made to zero).<Br/><Br/>
+        <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%; color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.imread(</span><span style="color: #0086d2">&#39;smarties.png&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">cv2.IMREAD_GRAYSCALE)</span>
+<span style="color: #ffffff">_,</span> <span style="color: #ffffff">mask</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.threshold(img,</span> <span style="color: #0086f7; font-weight: bold">220</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">cv2.THRESH_BINARY_INV)</span>
+
+<span style="color: #ffffff">kernal</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">np.ones((</span><span style="color: #0086f7; font-weight: bold">5</span><span style="color: #ffffff">,</span><span style="color: #0086f7; font-weight: bold">5</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">np.uint8)</span>
+<span style="color: #ffffff">erosion</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.erode(mask,</span> <span style="color: #ffffff">kernal,</span> <span style="color: #ffffff">iterations=</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">)</span>
+
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;Erosion&quot;</span><span style="color: #ffffff">,erosion)</span>
+
+<span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+
+        <br/><Br/><img style="border: 1px solid black;margin: 3px;"src="../image/opd39.png"/><br/><Br/>
+        <h4> 2. Dilation</h4>
+It is just opposite of erosion. Here, a pixel element is '1' if atleast one pixel under the kernel is '1'. So it increases the white region in the image or size of foreground object increases. Normally, in cases like noise removal, erosion is followed by dilation. Because, erosion removes white noises, but it also shrinks our object. So we dilate it. Since noise is gone, they won't come back, but our object area increases. It is also useful in joining broken parts of an object.
+
+        <br/><Br/>
+        <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.imread(</span><span style="color: #0086d2">&#39;smarties.png&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">cv2.IMREAD_GRAYSCALE)</span>
+<span style="color: #ffffff">_,</span> <span style="color: #ffffff">mask</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.threshold(img,</span> <span style="color: #0086f7; font-weight: bold">220</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">cv2.THRESH_BINARY_INV)</span>
+
+<span style="color: #ffffff">kernal</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">np.ones((</span><span style="color: #0086f7; font-weight: bold">5</span><span style="color: #ffffff">,</span><span style="color: #0086f7; font-weight: bold">5</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">np.uint8)</span>
+<span style="color: #ffffff">dilation</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.dilate(mask,</span> <span style="color: #ffffff">kernal,</span> <span style="color: #ffffff">iterations=</span><span style="color: #0086f7; font-weight: bold">2</span><span style="color: #ffffff">)</span>
+
+
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;Dilation&quot;</span><span style="color: #ffffff">,dilation)</span>
+
+<span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+
+        <br/><Br/><img style="border: 1px solid black;margin: 3px;"src="../image/opd40.png"/><br/><Br/>
+        <h4>Opening</h4>
+        Opening is just another name of erosion followed by dilation. It is useful in removing noise, as we explained above. Here we use the function, cv.morphologyEx()<br>
+        <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.imread(</span><span style="color: #0086d2">&#39;smarties.png&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">cv2.IMREAD_GRAYSCALE)</span>
+<span style="color: #ffffff">_,</span> <span style="color: #ffffff">mask</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.threshold(img,</span> <span style="color: #0086f7; font-weight: bold">220</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">cv2.THRESH_BINARY_INV)</span>
+
+<span style="color: #ffffff">kernal</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">np.ones((</span><span style="color: #0086f7; font-weight: bold">5</span><span style="color: #ffffff">,</span><span style="color: #0086f7; font-weight: bold">5</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">np.uint8)</span>
+<span style="color: #ffffff">opening</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.morphologyEx(mask,</span> <span style="color: #ffffff">cv2.MORPH_OPEN,</span> <span style="color: #ffffff">kernal)</span>
+
+
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;Opening&quot;</span><span style="color: #ffffff">,opening)</span>
+
+<span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+        <br/><Br/><img style="border: 1px solid black;margin: 3px;"src="../image/opd41.png"/><br/><Br/>
+<h4>Closing</h4>
+Closing is reverse of Opening, Dilation followed by Erosion. It is useful in closing small holes inside the foreground objects, or small black points on the object.<Br/><Br/>
+<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.imread(</span><span style="color: #0086d2">&#39;smarties.png&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">cv2.IMREAD_GRAYSCALE)</span>
+<span style="color: #ffffff">_,</span> <span style="color: #ffffff">mask</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.threshold(img,</span> <span style="color: #0086f7; font-weight: bold">220</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">cv2.THRESH_BINARY_INV)</span>
+
+<span style="color: #ffffff">kernal</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">np.ones((</span><span style="color: #0086f7; font-weight: bold">5</span><span style="color: #ffffff">,</span><span style="color: #0086f7; font-weight: bold">5</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">np.uint8)</span>
+<span style="color: #ffffff">closing</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.morphologyEx(mask,</span> <span style="color: #ffffff">cv2.MORPH_CLOSE,</span> <span style="color: #ffffff">kernal)</span>
+
+
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;Closing&quot;</span><span style="color: #ffffff">,closing)</span>
+
+<span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+        <br/><Br/><img style="border: 1px solid black;margin: 3px;"src="../image/opd42.png"/><br/><Br/>
+<h4>Morphological Gradient</h4>
+It is the difference between dilation and erosion of an image.
+The result will look like the outline of the object.<br/><Br/>
+<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.imread(</span><span style="color: #0086d2">&#39;smarties.png&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">cv2.IMREAD_GRAYSCALE)</span>
+<span style="color: #ffffff">_,</span> <span style="color: #ffffff">mask</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.threshold(img,</span> <span style="color: #0086f7; font-weight: bold">220</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">cv2.THRESH_BINARY_INV)</span>
+
+<span style="color: #ffffff">kernal</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">np.ones((</span><span style="color: #0086f7; font-weight: bold">5</span><span style="color: #ffffff">,</span><span style="color: #0086f7; font-weight: bold">5</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">np.uint8)</span>
+<span style="color: #ffffff">mg</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.morphologyEx(mask,</span> <span style="color: #ffffff">cv2.MORPH_GRADIENT,</span> <span style="color: #ffffff">kernal)</span>
+
+
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;Morphological Gradient&quot;</span><span style="color: #ffffff">,mg)</span>
+
+<span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+
+        <br/><Br/><img style="border: 1px solid black;margin: 3px;"src="../image/opd43.png"/><br/><Br/>
+<h4>6. Top Hat</h4>
+It is the difference between input image and Opening of the image. Below example is done for a 9x9 kernel.<br/><Br/>
+<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.imread(</span><span style="color: #0086d2">&#39;smarties.png&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">cv2.IMREAD_GRAYSCALE)</span>
+<span style="color: #ffffff">_,</span> <span style="color: #ffffff">mask</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.threshold(img,</span> <span style="color: #0086f7; font-weight: bold">220</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">cv2.THRESH_BINARY_INV)</span>
+
+<span style="color: #ffffff">kernal</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">np.ones((</span><span style="color: #0086f7; font-weight: bold">5</span><span style="color: #ffffff">,</span><span style="color: #0086f7; font-weight: bold">5</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">np.uint8)</span>
+<span style="color: #ffffff">th</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.morphologyEx(mask,</span> <span style="color: #ffffff">cv2.MORPH_TOPHAT,</span> <span style="color: #ffffff">kernal)</span>
+
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;Top Hat&quot;</span><span style="color: #ffffff">,th)</span>
+
+<span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+        <br/><Br/><img style="border: 1px solid black;margin: 3px;"src="../image/opd44.png"/>
+
         </p>
         <br>
         <br><h3> Videos</h3>
