@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+
+<style>
+body {
+    font-family: 'Open Sans';font-size: 18px;
+    text-align: justify;
+  	text-justify: inter-word;
+}
+    #contents{
+      display: none;
+    }
+    #loader{
+      position: absolute;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      width: 300px;
+      height: 100px;
+    }
+    #loader h3{
+      width: 400px;
+    }
+    .blink_me {
+  animation: blinker 1s linear infinite;
+}
+button:hover{
+    background: white;
+    color: black;
+}
+#output1{
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+
+#output2{
+    width: 258px;
+    background-color: black;
+    color: white;
+}
+#opd{
+    width: 350px;
+    border: 1px solid black;
+}
+button{
+    padding: 8px;
+    background: black;
+    color: white;
+    font-size: 16px;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+#outframe{
+
+     display: block; 
+     border: 1px solid black;
+     width: 298px;
+}
+#outframe1{
+
+     display: block; 
+     width: 278px;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+body{
+	 padding: 2%;padding-right: 8%;padding-left: 8%;line-height: 1.6;
+}
+@media (max-width: 420px) { /*420px*/
+    button{
+        font-size: 12px;
+    }
+
+#opd{
+    width: 250px;
+
+}
+		iframe{
+		width: 220px;
+		height:180px ;
+	}
+  body{
+    padding: 0.2%;
+    font-size: 14px;
+    padding-right: 	1%;
+	line-height: 1.6;
+    
+  }
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+	/* Optional: show position indicator in red
+	::-webkit-scrollbar-thumb {
+	    background: #FF0000;
+	}*/
+</style>
+  <script type="text/javascript">
+      window.onload=function(){
+        document.getElementById('loader').style.display= "none";
+        document.getElementById('contents').style.display= "block";
+      }
+  </script>
+	<title></title>
+</head>
+<!-- <body style="overflow: hidden; "> -->
+<body>
+
+	<div id="loader">
+		<h3 style="margin-left: 0px;" class="blink_me">Please hold on for a moment...</h3>
+	</div>
+		<div id="contents">
+	<p>
+        <h2>OpenCV Functions</h2>
+            In this section we will learn about different methods which comes with opencv including-
+            split, add, ROI, etc.
+            <br>
+            Let's begin with reading an image <br><br/>
+            <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%; color: gray;">1
+2
+3
+4
+5
+6
+7</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+
+<span style="color: #ffffff">image</span> <span style="color: #ffffff">=cv2.imread(</span><span style="color: #0086d2">&#39;tomatoes.jpg&#39;</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;Image frame&quot;</span><span style="color: #ffffff">,image)</span>
+
+<span style="color: #ffffff">cv2.waitKey()</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div><br/><Br/>
+
+<img  style="border: 1px solid black;"src="../image/opd3.png"><br><br/>
+
+<h3> cv2.split </h3>
+The cv2.split() method splits the image into three channels - b,g,r channels<br/><Br/>
+<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=cv2.imread(</span><span style="color: #0086d2">&#39;tomatoes.jpg&#39;</span><span style="color: #ffffff">)</span>
+
+<span style="color: #ffffff">b,g,r</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.split(img)</span>
+
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;Blue&quot;</span><span style="color: #ffffff">,b)</span>
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;Green&quot;</span><span style="color: #ffffff">,g)</span>
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;Red&quot;</span><span style="color: #ffffff">,r)</span>
+
+<span style="color: #ffffff">cv2.waitKey()</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div><br/><br/>
+
+<img align="left" height="320" width="310" style="border: 1px solid black;margin: 3px;"src="../image/opd12.png"/>
+<img align="left"  height="320" width="310"style="border: 1px solid black;margin: 3px;"src="../image/opd13.png"/>
+<img align="left"  height="320" width="310"style="border: 1px solid black;margin: 3px;"src="../image/opd14.png"/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<h3> cv2.merge </h3>
+The cv2.merge() method merges the image from three channels - b,g,r into a single image
+<br/><Br/>
+<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=cv2.imread(</span><span style="color: #0086d2">&#39;tomatoes.jpg&#39;</span><span style="color: #ffffff">)</span>
+
+<span style="color: #ffffff">b,g,r</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.split(img)</span>
+<span style="color: #ffffff">merged</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.merge((b,g,r))</span>
+
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;Merged&quot;</span><span style="color: #ffffff">,merged)</span>
+
+<span style="color: #ffffff">cv2.waitKey()</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+<br/><br/>
+<img  style="border: 1px solid black;"src="../image/opd3.png"><br><br/>
+<h3> ROI (Region of Interest)</h3>
+In ROI we manipulate or capture certain parts of the image and reuse it.
+<br/><br/>
+<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=cv2.imread(</span><span style="color: #0086d2">&#39;tomatoes.jpg&#39;</span><span style="color: #ffffff">)</span>
+
+<span style="color: #ffffff">part_of_img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">img[</span><span style="color: #0086f7; font-weight: bold">120</span><span style="color: #ffffff">:</span><span style="color: #0086f7; font-weight: bold">200</span><span style="color: #ffffff">,</span><span style="color: #0086f7; font-weight: bold">150</span><span style="color: #ffffff">:</span><span style="color: #0086f7; font-weight: bold">200</span><span style="color: #ffffff">]</span>
+<span style="color: #ffffff">img[</span><span style="color: #0086f7; font-weight: bold">20</span><span style="color: #ffffff">:</span><span style="color: #0086f7; font-weight: bold">100</span><span style="color: #ffffff">,</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">:</span><span style="color: #0086f7; font-weight: bold">50</span><span style="color: #ffffff">]</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">part_of_img</span>
+
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;ROI&quot;</span><span style="color: #ffffff">,img)</span>
+
+<span style="color: #ffffff">cv2.waitKey()</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+<br/><Br/>
+<img height="320" width="310" style="border: 1px solid black;margin: 3px;"src="../image/opd15.png"/>
+<br/><br/>
+<h3> cv2.add </h3>
+We can add two images with the OpenCV function, cv.add(). Both images should be of same depth and type, or the second image can just be a scalar value. <br/><Br/>
+<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=cv2.imread(</span><span style="color: #0086d2">&#39;tomatoes.jpg&#39;</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">frame</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.imread(</span><span style="color: #0086d2">&#39;frame.png&#39;</span><span style="color: #ffffff">)</span>
+
+<span style="color: #ffffff">dst</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.add(frame,img)</span>
+
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;Image&quot;</span><span style="color: #ffffff">,dst)</span>
+
+<span style="color: #ffffff">cv2.waitKey()</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div><br/><br/>
+<img height="320" width="310" style="border: 1px solid black;margin: 3px;"src="../image/opd16.png"/>
+
+
+		</p>
+        <br/><br/>
+        <h3> Videos</h3>
+		<iframe width="320" height="215" src="https://www.youtube.com/embed/IlRXaU6E4MA">
+</iframe>
+</div><br><br><br><br><br><br><br><br>
+</body>
+</html>

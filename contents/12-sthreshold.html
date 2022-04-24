@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+
+<style>
+body {
+    font-family: 'Open Sans';font-size: 18px;
+    text-align: justify;
+  	text-justify: inter-word;
+}
+img{
+    height: 30%;
+    width: 30%;
+}
+    #contents{
+      display: none;
+    }
+    #loader{
+      position: absolute;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      width: 300px;
+      height: 100px;
+    }
+    #loader h3{
+      width: 400px;
+    }
+    .blink_me {
+  animation: blinker 1s linear infinite;
+}
+button:hover{
+    background: white;
+    color: black;
+}
+#output1{
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+
+#output2{
+    width: 258px;
+    background-color: black;
+    color: white;
+}
+#opd{
+    width: 350px;
+    border: 1px solid black;
+}
+button{
+    padding: 8px;
+    background: black;
+    color: white;
+    font-size: 16px;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+#outframe{
+
+     display: block; 
+     border: 1px solid black;
+     width: 298px;
+}
+#outframe1{
+
+     display: block; 
+     width: 278px;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+body{
+	 padding: 2%;padding-right: 8%;padding-left: 8%;line-height: 1.6;
+}
+@media (max-width: 420px) { /*420px*/
+    button{
+        font-size: 12px;
+    }
+
+#opd{
+    width: 250px;
+
+}
+
+img{
+    height: 85%;
+    width: 85%;
+}	
+	iframe{
+		width: 220px;
+		height:180px ;
+	}
+  body{
+    padding: 0.2%;
+    font-size: 14px;
+    padding-right: 	1%;
+	line-height: 1.6;
+    
+  }
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+	/* Optional: show position indicator in red
+	::-webkit-scrollbar-thumb {
+	    background: #FF0000;
+	}*/
+</style>
+  <script type="text/javascript">
+      window.onload=function(){
+        document.getElementById('loader').style.display= "none";
+        document.getElementById('contents').style.display= "block";
+      }
+  </script>
+	<title></title>
+</head>
+<!-- <body style="overflow: hidden; "> -->
+<body>
+
+	<div id="loader">
+		<h3 style="margin-left: 0px;" class="blink_me">Please hold on for a moment...</h3>
+	</div>
+		<div id="contents">
+	<p>
+        <h2>Simple Thresholding</h2>
+
+        In this tutorial, you will learn how to use OpenCV and the cv2.threshold function to apply basic thresholding and Otsu thresholding.<br/><br/>
+
+        Thresholding is one of the most common (and basic) segmentation techniques in computer vision and it allows us to separate the foreground (i.e., the objects that we are interested in) from the background of the image <br/><Br>
+        
+        <img style="border: 1px solid black;margin: 3px;"src="../image/opd30.png"/>
+        <br/><Br/>
+        <h3>Thresholding Binary</h3>
+        In Binary threshold we are comparing each pixel of original pixel to 50. If the value of the pixel is less than 50 the value is assigned to 0 and if the value is greater than 50 then the pixel value is assigned 255.<br/><Br/>
+
+        <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">cv</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.imread(</span><span style="color: #0086d2">&#39;gradient.jpg&#39;</span><span style="color: #ffffff">,</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+                    <span style="color: #008800; font-style: italic; background-color: #0f140f"># (source, threshold_value, maximum_value, thresh_type)</span>
+<span style="color: #ffffff">_,</span> <span style="color: #ffffff">th1</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.threshold(img,</span> <span style="color: #0086f7; font-weight: bold">100</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">cv.THRESH_BINARY)</span>
+
+<span style="color: #ffffff">cv.imshow(</span><span style="color: #0086d2">&quot;Image&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">img)</span>
+<span style="color: #ffffff">cv.imshow(</span><span style="color: #0086d2">&quot;th1&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">th1)</span>
+
+<span style="color: #ffffff">cv.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+<Br/><br/>
+        <img style="border: 1px solid black;margin: 3px;"src="../image/opd29.png"/>
+        <Br/><Br/>
+        <h3> Thresholding Binary Inverse </h3>
+        Inverse of Thresholding Binary<Br/><br/>
+        <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">cv</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.imread(</span><span style="color: #0086d2">&#39;gradient.jpg&#39;</span><span style="color: #ffffff">,</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+                    <span style="color: #008800; font-style: italic; background-color: #0f140f"># (source, threshold_value, maximum_value, thresh_type)</span>
+<span style="color: #ffffff">_,</span> <span style="color: #ffffff">th2</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.threshold(img,</span> <span style="color: #0086f7; font-weight: bold">100</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">cv.THRESH_BINARY_INV)</span>
+
+<span style="color: #ffffff">cv.imshow(</span><span style="color: #0086d2">&quot;th2&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">th2)</span>
+
+<span style="color: #ffffff">cv.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+<Br/><Br/>
+        <img style="border: 1px solid black;margin: 3px;"src="../image/opd31.png"/><br/><Br/>
+
+<h3>Thresholding Trunc</h3>
+Upto the treshold value the pixels will not be changed, the pixel value greater than the threshold value will change to the threshold value. 
+<br/><br/>
+<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">cv</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.imread(</span><span style="color: #0086d2">&#39;gradient.jpg&#39;</span><span style="color: #ffffff">,</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+                    <span style="color: #008800; font-style: italic; background-color: #0f140f"># (source, threshold_value, maximum_value, thresh_type)</span>
+<span style="color: #ffffff">_,</span> <span style="color: #ffffff">th3</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.threshold(img,</span> <span style="color: #0086f7; font-weight: bold">127</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">cv.THRESH_TRUNC)</span>
+
+<span style="color: #ffffff">cv.imshow(</span><span style="color: #0086d2">&quot;Image&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">img)</span>
+<span style="color: #ffffff">cv.imshow(</span><span style="color: #0086d2">&quot;th3&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">th3)</span>
+
+<span style="color: #ffffff">cv.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv.destroyAllWindows()</span>
+</pre></td></tr></table></div><Br/><Br/>
+        <img style="border: 1px solid black;margin: 3px;"src="../image/opd32.png"/><br/><Br/>
+
+<h3>Thresholding to zero</h3>
+If the pixel value is less than threshold the pixel value is assgined to 0 and if the pixel value is greater than threshold no changes are made.<br/> <Br/>
+<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">cv</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.imread(</span><span style="color: #0086d2">&#39;gradient.jpg&#39;</span><span style="color: #ffffff">,</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+
+                    <span style="color: #008800; font-style: italic; background-color: #0f140f"># (source, threshold_value, maximum_value, thresh_type)</span>
+<span style="color: #ffffff">_,</span> <span style="color: #ffffff">th4</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.threshold(img,</span> <span style="color: #0086f7; font-weight: bold">127</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">cv.THRESH_TOZERO)</span>
+<span style="color: #ffffff">cv.imshow(</span><span style="color: #0086d2">&quot;th4&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">th4)</span>
+
+<span style="color: #ffffff">cv.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv.destroyAllWindows()</span>
+</pre></td></tr></table></div><br/><Br/>
+
+
+<img style="border: 1px solid black;margin: 3px;"src="../image/opd33.png"/><br/><Br/>
+<h3> Thresholding to zero inverse </h3>
+Inverse of Thresholding to zero<br/><Br/>
+<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">cv</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.imread(</span><span style="color: #0086d2">&#39;gradient.jpg&#39;</span><span style="color: #ffffff">,</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+
+                    <span style="color: #008800; font-style: italic; background-color: #0f140f"># (source, threshold_value, maximum_value, thresh_type)</span>
+<span style="color: #ffffff">_,</span> <span style="color: #ffffff">th5</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.threshold(img,</span> <span style="color: #0086f7; font-weight: bold">127</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">cv.THRESH_TOZERO_INV)</span>
+
+<span style="color: #ffffff">cv.imshow(</span><span style="color: #0086d2">&quot;th5&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">th5)</span>
+
+<span style="color: #ffffff">cv.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+
+
+<Br/><BR/><img style="border: 1px solid black;margin: 3px;"src="../image/opd33.png"/><br/><Br/>
+Completed Successfully.
+		</p>
+		<br>
+		<br><h3> Videos</h3>
+		<iframe width="320" height="215" src="https://www.youtube.com/embed/IlRXaU6E4MA">
+</iframe>
+</div><br><br><br><br><br><br><br><br>
+</body>
+</html>

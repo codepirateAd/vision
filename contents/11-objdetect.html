@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+
+<style>
+body {
+    font-family: 'Open Sans';font-size: 18px;
+    text-align: justify;
+  	text-justify: inter-word;
+}
+    #contents{
+      display: none;
+    }
+    #loader{
+      position: absolute;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      width: 300px;
+      height: 100px;
+    }
+    #loader h3{
+      width: 400px;
+    }
+    .blink_me {
+  animation: blinker 1s linear infinite;
+}
+img{
+    height: 30%;
+    width: 30%;
+}
+button:hover{
+    background: white;
+    color: black;
+}
+#output1{
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+
+#output2{
+    width: 258px;
+    background-color: black;
+    color: white;
+}
+#opd{
+    width: 350px;
+    border: 1px solid black;
+}
+button{
+    padding: 8px;
+    background: black;
+    color: white;
+    font-size: 16px;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+#outframe{
+
+     display: block; 
+     border: 1px solid black;
+     width: 298px;
+}
+#outframe1{
+
+     display: block; 
+     width: 278px;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+body{
+	 padding: 2%;padding-right: 8%;padding-left: 8%;line-height: 1.6;
+}
+@media (max-width: 420px) { /*420px*/
+    button{
+        font-size: 12px;
+    }
+
+#opd{
+    width: 250px;
+
+}
+img{
+    height: 85%;
+    width: 85%;
+}
+		iframe{
+		width: 220px;
+		height:180px ;
+	}
+  body{
+    padding: 0.2%;
+    font-size: 14px;
+    padding-right: 	1%;
+	line-height: 1.6;
+    
+  }
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+	/* Optional: show position indicator in red
+	::-webkit-scrollbar-thumb {
+	    background: #FF0000;
+	}*/
+</style>
+  <script type="text/javascript">
+      window.onload=function(){
+        document.getElementById('loader').style.display= "none";
+        document.getElementById('contents').style.display= "block";
+      }
+  </script>
+	<title></title>
+</head>
+<!-- <body style="overflow: hidden; "> -->
+<body>
+
+	<div id="loader">
+		<h3 style="margin-left: 0px;" class="blink_me">Please hold on for a moment...</h3>
+	</div>
+		<div id="contents">
+	<p>
+        <h2>Object Detection</h2>
+        In this section we will be learning about objection detection using HSV(Hue, Saturation and Value) colour space.
+
+        <h3>HSV</h3>
+        The HSV (Hue, Saturation, Value) color space corresponds better to how people experience color than the RGB color space does. For example, this color space is often used by people who are selecting colors, such as paint or ink color, from a color wheel or palette.
+
+        <br/><br/>
+
+        <table border="1px">
+            <tr>
+                <th>Attribute</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>H</td>
+                <td>Hue, which corresponds to the color’s position on a color wheel. H is in the range [0, 1]. As H increases, colors transition from red to orange, yellow, green, cyan, blue, magenta, and finally back to red. Both 0 and 1 indicate red.</td>
+            </tr>
+            <tr>
+                <td>S</td>
+                <td>Saturation, which is the amount of hue or departure from neutral. S is in the range [0, 1]. As S increases, colors vary from unsaturated (shades of gray) to fully saturated (no white component).</td>
+            </tr>
+            <tr>
+                <td>V</td>
+                <td>Value, which is the maximum value among the red, green, and blue components of a specific color. V is in the range [0, 1]. As V increases, the corresponding colors become increasingly brighter.</td>
+            </tr>
+        </table>
+        <br/><Br/>
+
+        <h3>Testing Object detection with static values</h3>
+        <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+
+<span style="color: #fb660a; font-weight: bold">while</span> <span style="color: #ffffff">True:</span>
+    <span style="color: #ffffff">frame</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.imread(</span><span style="color: #0086d2">&#39;smarties.png&#39;</span><span style="color: #ffffff">)</span>
+
+    <span style="color: #ffffff">hsv</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.cvtColor(frame,</span> <span style="color: #ffffff">cv2.COLOR_BGR2HSV)</span>
+
+    <span style="color: #ffffff">l_b</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">np.array([</span><span style="color: #0086f7; font-weight: bold">110</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">50</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">50</span><span style="color: #ffffff">])</span>
+    <span style="color: #ffffff">u_b</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">np.array([</span><span style="color: #0086f7; font-weight: bold">130</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">])</span>
+
+    <span style="color: #ffffff">mask</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.inRange(hsv,</span> <span style="color: #ffffff">l_b,</span> <span style="color: #ffffff">u_b)</span>
+
+    <span style="color: #ffffff">res</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.bitwise_and(frame,</span> <span style="color: #ffffff">frame,</span> <span style="color: #ffffff">mask=mask)</span>
+
+    <span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;frame&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">frame)</span>
+    <span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;mask&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">mask)</span>
+    <span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;res&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">res)</span>
+
+    <span style="color: #ffffff">key</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">)</span>
+    <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">key</span> <span style="color: #ffffff">==</span> <span style="color: #0086f7; font-weight: bold">27</span><span style="color: #ffffff">:</span>
+        <span style="color: #fb660a; font-weight: bold">break</span>
+
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+<br/><Br/>
+<h3>Output</h3>
+<img style="border: 1px solid black;margin: 3px;"src="../image/opd23.png"/><br/>
+<img style="border: 1px solid black;margin: 3px;"src="../image/opd24.png"/><br/>
+<img style="border: 1px solid black;margin: 3px;"src="../image/opd25.png"/><br/>
+<br/><Br/>
+
+<h3> Object Detection using Tracker </h3>
+Here, instead of using custom values we will create a GUI based tracker to perform object detection<br/><br/>
+<h3>Code</h3>
+<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%; color: gray"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+
+<span style="color: #fb660a; font-weight: bold">def</span> <span style="color: #ff0086; font-weight: bold">nothing</span><span style="color: #ffffff">(x):</span>
+    <span style="color: #fb660a; font-weight: bold">pass</span>
+
+<span style="color: #ffffff">cv2.namedWindow(</span><span style="color: #0086d2">&quot;Tracking&quot;</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv2.createTrackbar(</span><span style="color: #0086d2">&quot;LH&quot;</span><span style="color: #ffffff">,</span> <span style="color: #0086d2">&quot;Tracking&quot;</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">nothing)</span>
+<span style="color: #ffffff">cv2.createTrackbar(</span><span style="color: #0086d2">&quot;LS&quot;</span><span style="color: #ffffff">,</span> <span style="color: #0086d2">&quot;Tracking&quot;</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">nothing)</span>
+<span style="color: #ffffff">cv2.createTrackbar(</span><span style="color: #0086d2">&quot;LV&quot;</span><span style="color: #ffffff">,</span> <span style="color: #0086d2">&quot;Tracking&quot;</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">nothing)</span>
+<span style="color: #ffffff">cv2.createTrackbar(</span><span style="color: #0086d2">&quot;UH&quot;</span><span style="color: #ffffff">,</span> <span style="color: #0086d2">&quot;Tracking&quot;</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">nothing)</span>
+<span style="color: #ffffff">cv2.createTrackbar(</span><span style="color: #0086d2">&quot;US&quot;</span><span style="color: #ffffff">,</span> <span style="color: #0086d2">&quot;Tracking&quot;</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">nothing)</span>
+<span style="color: #ffffff">cv2.createTrackbar(</span><span style="color: #0086d2">&quot;UV&quot;</span><span style="color: #ffffff">,</span> <span style="color: #0086d2">&quot;Tracking&quot;</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">nothing)</span>
+
+<span style="color: #fb660a; font-weight: bold">while</span> <span style="color: #ffffff">True:</span>
+    <span style="color: #ffffff">frame</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.imread(</span><span style="color: #0086d2">&#39;smarties.png&#39;</span><span style="color: #ffffff">)</span>
+
+    <span style="color: #ffffff">hsv</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.cvtColor(frame,</span> <span style="color: #ffffff">cv2.COLOR_BGR2HSV)</span>
+
+    <span style="color: #ffffff">l_h</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.getTrackbarPos(</span><span style="color: #0086d2">&quot;LH&quot;</span><span style="color: #ffffff">,</span> <span style="color: #0086d2">&quot;Tracking&quot;</span><span style="color: #ffffff">)</span>
+    <span style="color: #ffffff">l_s</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.getTrackbarPos(</span><span style="color: #0086d2">&quot;LS&quot;</span><span style="color: #ffffff">,</span> <span style="color: #0086d2">&quot;Tracking&quot;</span><span style="color: #ffffff">)</span>
+    <span style="color: #ffffff">l_v</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.getTrackbarPos(</span><span style="color: #0086d2">&quot;LV&quot;</span><span style="color: #ffffff">,</span> <span style="color: #0086d2">&quot;Tracking&quot;</span><span style="color: #ffffff">)</span>
+
+    <span style="color: #ffffff">u_h</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.getTrackbarPos(</span><span style="color: #0086d2">&quot;UH&quot;</span><span style="color: #ffffff">,</span> <span style="color: #0086d2">&quot;Tracking&quot;</span><span style="color: #ffffff">)</span>
+    <span style="color: #ffffff">u_s</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.getTrackbarPos(</span><span style="color: #0086d2">&quot;US&quot;</span><span style="color: #ffffff">,</span> <span style="color: #0086d2">&quot;Tracking&quot;</span><span style="color: #ffffff">)</span>
+    <span style="color: #ffffff">u_v</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.getTrackbarPos(</span><span style="color: #0086d2">&quot;UV&quot;</span><span style="color: #ffffff">,</span> <span style="color: #0086d2">&quot;Tracking&quot;</span><span style="color: #ffffff">)</span>
+
+    <span style="color: #ffffff">l_b</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">np.array([l_h,</span> <span style="color: #ffffff">l_s,</span> <span style="color: #ffffff">l_v])</span>
+    <span style="color: #ffffff">u_b</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">np.array([u_h,</span> <span style="color: #ffffff">u_s,</span> <span style="color: #ffffff">u_v])</span>
+
+    <span style="color: #ffffff">mask</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.inRange(hsv,</span> <span style="color: #ffffff">l_b,</span> <span style="color: #ffffff">u_b)</span>
+
+    <span style="color: #ffffff">res</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.bitwise_and(frame,</span> <span style="color: #ffffff">frame,</span> <span style="color: #ffffff">mask=mask)</span>
+
+    <span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;frame&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">frame)</span>
+    <span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;mask&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">mask)</span>
+    <span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;res&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">res)</span>
+
+    <span style="color: #ffffff">key</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">)</span>
+    <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">key</span> <span style="color: #ffffff">==</span> <span style="color: #0086f7; font-weight: bold">27</span><span style="color: #ffffff">:</span>
+        <span style="color: #fb660a; font-weight: bold">break</span>
+
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+<br><br>
+<h3> Output </h3>
+<img style="border: 1px solid black;margin: 3px;"src="../image/opd26.png"/><br/>
+<img style="border: 1px solid black;margin: 3px;"src="../image/opd27.png"/><br/>
+<img style="border: 1px solid black;margin: 3px;"src="../image/opd28.png"/><br/>
+<br/><Br/>
+The trackpad here is use to adjust he HUE value for the respective Image.
+		</p>
+		<br>
+		<br><h3> Videos</h3>
+		<iframe width="320" height="215" src="https://www.youtube.com/embed/IlRXaU6E4MA">
+</iframe>
+</div><br><br><br><br><br><br><br><br>
+</body>
+</html>

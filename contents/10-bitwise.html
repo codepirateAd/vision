@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+
+<style>
+body {
+    font-family: 'Open Sans';font-size: 18px;
+    text-align: justify;
+  	text-justify: inter-word;
+}
+    #contents{
+      display: none;
+    }
+    #loader{
+      position: absolute;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      width: 300px;
+      height: 100px;
+    }
+    #loader h3{
+      width: 400px;
+    }
+    .blink_me {
+  animation: blinker 1s linear infinite;
+}
+button:hover{
+    background: white;
+    color: black;
+}
+#output1{
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+
+#output2{
+    width: 258px;
+    background-color: black;
+    color: white;
+}
+#opd{
+    width: 350px;
+    border: 1px solid black;
+}
+button{
+    padding: 8px;
+    background: black;
+    color: white;
+    font-size: 16px;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+img{
+    height: 40%;
+    width: 40%;
+}
+#outframe{
+
+     display: block; 
+     border: 1px solid black;
+     width: 298px;
+}
+#outframe1{
+
+     display: block; 
+     width: 278px;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+body{
+	 padding: 2%;padding-right: 8%;padding-left: 8%;line-height: 1.6;
+}
+@media (max-width: 420px) { /*420px*/
+    button{
+        font-size: 12px;
+    }
+
+#opd{
+    width: 250px;
+
+}
+img{
+    height: 85%;
+    width: 85%;
+}
+		iframe{
+		width: 220px;
+		height:180px ;
+	}
+  body{
+    padding: 0.2%;
+    font-size: 14px;
+    padding-right: 	1%;
+	line-height: 1.6;
+    
+  }
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+	/* Optional: show position indicator in red
+	::-webkit-scrollbar-thumb {
+	    background: #FF0000;
+	}*/
+</style>
+  <script type="text/javascript">
+      window.onload=function(){
+        document.getElementById('loader').style.display= "none";
+        document.getElementById('contents').style.display= "block";
+      }
+  </script>
+	<title></title>
+</head>
+<!-- <body style="overflow: hidden; "> -->
+<body>
+
+	<div id="loader">
+		<h3 style="margin-left: 0px;" class="blink_me">Please hold on for a moment...</h3>
+	</div>
+		<div id="contents">
+	<p>
+        <h2>Bitwise Operations</h2>
+        Bitwise operations are used in image manipulation and used for extracting essential parts in the image. In this section, we will be learning the following bitwise operations : <br/>
+        <ol>
+            <li>AND</li>
+            <li>OR</li>
+            <li>XOR</li>
+            <li>NOT</li>
+        </ol>
+
+        <h3> Load images </h3>
+        We will be using two images in this this section, one we will load using imshow() and another we will create using numpy. <br/><br/>
+
+        <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+
+<span style="color: #ffffff">img1</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">np.zeros((</span><span style="color: #0086f7; font-weight: bold">250</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">499</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">3</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">np.uint8)</span>
+<span style="color: #ffffff">img1</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.rectangle(img1,(</span><span style="color: #0086f7; font-weight: bold">200</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">300</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">100</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">-</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">img2</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.imread(</span><span style="color: #0086d2">&quot;image.png&quot;</span><span style="color: #ffffff">)</span>
+
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;Image 1&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">img1)</span>
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;Image 2&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">img2</span>
+
+<span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+<Br/><br/>
+
+<h3>Output</h3>
+<img style="border: 1px solid black;margin: 3px;"src="../image/opd17.png"/><br/>
+<img style="border: 1px solid black;margin: 3px;"src="../image/opd18.png"/><br/>
+<br/>
+<h3>Bitwise AND </h3>
+Bitwise conjunction of input images. <br/><Br/> 
+
+<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+
+<span style="color: #ffffff">img1</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">np.zeros((</span><span style="color: #0086f7; font-weight: bold">250</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">499</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">3</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">np.uint8)</span>
+<span style="color: #ffffff">img1</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.rectangle(img1,(</span><span style="color: #0086f7; font-weight: bold">200</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">300</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">100</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">-</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">img2</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.imread(</span><span style="color: #0086d2">&quot;image.png&quot;</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">bitAnd</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.bitwise_and(img2,</span> <span style="color: #ffffff">img1)</span>
+
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&#39;Bitwise And&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">bitAnd)</span>
+
+<span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+<br/>
+<h3>Output</h3>
+<img style="border: 1px solid black;margin: 3px;"src="../image/opd19.png"/><br/><br/>
+<h3>Bitwise OR </h3>
+Bitwise disjunction of input images.<br/> <br/>
+
+<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%; color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+
+<span style="color: #ffffff">img1</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">np.zeros((</span><span style="color: #0086f7; font-weight: bold">250</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">499</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">3</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">np.uint8)</span>
+<span style="color: #ffffff">img1</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.rectangle(img1,(</span><span style="color: #0086f7; font-weight: bold">200</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">300</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">100</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">-</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">img2</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.imread(</span><span style="color: #0086d2">&quot;image.png&quot;</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">bitOr</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.bitwise_or(img2,</span> <span style="color: #ffffff">img1)</span>
+
+
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&#39;Bitwise OR&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">bitOr)</span>
+
+<span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div><br/>
+<h3>Ouput</h3>
+<img style="border: 1px solid black;margin: 3px;"src="../image/opd20.png"/><br/><br/>
+
+<h3>Bitwise XOR</h3>
+Biwise exclusive-OR operation on input images.<br/><br/>
+<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%; color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+
+<span style="color: #ffffff">img1</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">np.zeros((</span><span style="color: #0086f7; font-weight: bold">250</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">499</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">3</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">np.uint8)</span>
+<span style="color: #ffffff">img1</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.rectangle(img1,(</span><span style="color: #0086f7; font-weight: bold">200</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">300</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">100</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">-</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">img2</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.imread(</span><span style="color: #0086d2">&quot;image.png&quot;</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">bitXor</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.bitwise_xor(img1,</span> <span style="color: #ffffff">img2)</span>
+
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&#39;Bitwise XOR&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">bitXor)</span>
+
+<span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div><br/>
+<h3>Output</h3>
+<img style="border: 1px solid black;margin: 3px;"src="../image/opd21.png"/><br/><br/>
+<h3>Bitwise NOT operation </h3>
+Inversion of input image.
+<br/><Br/>
+<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+
+<span style="color: #ffffff">img1</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">np.zeros((</span><span style="color: #0086f7; font-weight: bold">250</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">499</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">3</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">np.uint8)</span>
+<span style="color: #ffffff">img1</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.rectangle(img1,(</span><span style="color: #0086f7; font-weight: bold">200</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">300</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">100</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">),</span> <span style="color: #ffffff">-</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">img2</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.imread(</span><span style="color: #0086d2">&quot;image.png&quot;</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">bitNot</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.bitwise_not(img1)</span>
+
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&#39;Bitwise NOT&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">bitNot)</span>
+
+<span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div><br/>
+<h3>Output</h3>
+<img style="border: 1px solid black;margin: 3px;"src="../image/opd22.png"/><br/><br/>
+
+		</p>
+		<br>
+		<br><h3> Videos</h3>
+		<iframe width="320" height="215" src="https://www.youtube.com/embed/IlRXaU6E4MA">
+</iframe>
+</div><br><br><br><br><br><br><br><br>
+</body>
+</html>

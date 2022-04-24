@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+
+<style>
+body {
+    font-family: 'Open Sans';font-size: 18px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+img{
+    height: 30%;
+    width: 30%;
+}
+    #contents{
+      display: none;
+    }
+    #loader{
+      position: absolute;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      width: 300px;
+      height: 100px;
+    }
+    #loader h3{
+      width: 400px;
+    }
+    .blink_me {
+  animation: blinker 1s linear infinite;
+}
+button:hover{
+    background: white;
+    color: black;
+}
+#output1{
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+
+#output2{
+    width: 258px;
+    background-color: black;
+    color: white;
+}
+#opd{
+    width: 350px;
+    border: 1px solid black;
+}
+button{
+    padding: 8px;
+    background: black;
+    color: white;
+    font-size: 16px;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+#outframe{
+
+     display: block; 
+     border: 1px solid black;
+     width: 298px;
+}
+#outframe1{
+
+     display: block; 
+     width: 278px;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+body{
+     padding: 2%;padding-right: 8%;padding-left: 8%;line-height: 1.6;
+}
+@media (max-width: 420px) { /*420px*/
+    button{
+        font-size: 12px;
+    }
+
+#opd{
+    width: 250px;
+
+}
+
+img{
+    height: 85%;
+    width: 85%;
+}   
+    iframe{
+        width: 220px;
+        height:180px ;
+    }
+  body{
+    padding: 0.2%;
+    font-size: 14px;
+    padding-right:  1%;
+    line-height: 1.6;
+    
+  }
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+    /* Optional: show position indicator in red
+    ::-webkit-scrollbar-thumb {
+        background: #FF0000;
+    }*/
+</style>
+  <script type="text/javascript">
+      window.onload=function(){
+        document.getElementById('loader').style.display= "none";
+        document.getElementById('contents').style.display= "block";
+      }
+  </script>
+    <title></title>
+</head>
+<!-- <body style="overflow: hidden; "> -->
+<body>
+
+    <div id="loader">
+        <h3 style="margin-left: 0px;" class="blink_me">Please hold on for a moment...</h3>
+    </div>
+        <div id="contents">
+    <p>
+        <h2>Adaptive Thresholding</h2>
+        One of the downsides of using simple thresholding methods is that we need to manually supply our threshold value, T. Furthermore, finding a good value of T may require many manual experiments and parameter tunings, which is simply not practical in most situations.
+        <br/>
+        To aid us in automatically determining the value of T, we leveraged Otsu’s method. And while Otsu’s method can save us a lot of time playing the “guess and checking” game, we are left with only a single value of T to threshold the entire image.
+            <Br/><Br/>
+        For simple images with controlled lighting conditions, this usually isn’t a problem. But for situations when the lighting is non-uniform across the image, having only a single value of T can seriously hurt our thresholding performance.Simply put, having just one value of T may not suffice.
+        <Br/><Br/>
+        To overcome this problem, we can use adaptive thresholding, which considers small neighbors of pixels and then finds an optimal threshold value T for each neighbor. This method allows us to handle cases where there may be dramatic ranges of pixel intensities and the optimal value of T may change for different parts of the image.
+        <br/><Br/>
+        In adaptive thresholding, sometimes called local thresholding, our goal is to statistically examine the pixel intensity values in the neighborhood of a given pixel, p.The general assumption that underlies all adaptive and local thresholding methods is that smaller regions of an image are more likely to have approximately uniform illumination. This implies that local regions of an image will have similar lighting, as opposed to the image as a whole, which may have dramatically different lighting for each region.
+        <br/><Br/>
+        However, choosing the size of the pixel neighborhood for local thresholding is absolutely crucial.The neighborhood must be large enough to cover sufficient background and foreground pixels, otherwise the value of T will be more or less irrelevant.
+        <Br/><Br/>
+        But if we make our neighborhood value too large, then we completely violate the assumption that local regions of an image will have approximately uniform illumination. Again, if we supply a very large neighborhood, then our results will look very similar to global thresholding using the simple thresholding or Otsu’s methods.
+        <br/>In practice, tuning the neighborhood size is (usually) not that hard of a problem. You’ll often find that there is a broad range of neighborhood sizes that provide you with adequate results- it’s not like finding an optimal value of T that could make or break your thresholding output.
+
+        <br><br/>
+        <h3> Example image </h3>
+        <img style="border: 1px solid black;margin: 3px;"src="../image/opd35.jpg"/><br/><Br/>
+
+        <h3> Simple Thresholding Example </h3>
+            The code below demonstrates a simple example of threshold binary<Br/><br/>
+            <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%; color: gray"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">cv</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.imread(</span><span style="color: #0086d2">&#39;suduko.jpg&#39;</span><span style="color: #ffffff">,</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">_,</span> <span style="color: #ffffff">th1</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.threshold(img,</span> <span style="color: #0086f7; font-weight: bold">127</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">cv.THRESH_BINARY)</span>
+
+<span style="color: #ffffff">cv.imshow(</span><span style="color: #0086d2">&quot;Image&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">img)</span>
+<span style="color: #ffffff">cv.imshow(</span><span style="color: #0086d2">&quot;THRESH_BINARY&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">th1)</span>
+
+<span style="color: #ffffff">cv.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+<Br/><Br/>
+        <img style="border: 1px solid black;margin: 3px;"src="../image/opd36.png"/><br/><Br/>
+
+        We can see some region of this image is black and other region of this image is visible. This is because the image have different illumination value at different regions that's why we see half of the image which have the good illumination and we don't see half of the image which doesn't have the better illumination so in that case it's the better idea to use adaptive thresholding so let's see how.
+
+        <h4>Adaptive Thresholding Example</h4>
+            We will see how the adaptive thresholding solves the problem of illumination.
+            There are two adaptive methods which decides how the thresholding value is calculated. <br/>
+            1. cv.ADAPTIVE_THRESH_MEAN_C &nbsp; &nbsp; 2. cv.ADAPTIVE_THRESH_GAUSSIAN_C
+            <Br/><br/>
+
+            <h3>1. cv.ADAPTIVE_THRESH_MEAN_C</h3>
+<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">cv</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.imread(</span><span style="color: #0086d2">&#39;suduko.jpg&#39;</span><span style="color: #ffffff">,</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">th2</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.adaptiveThreshold(img,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">cv.ADAPTIVE_THRESH_MEAN_C,</span> <span style="color: #ffffff">cv.THRESH_BINARY,</span> <span style="color: #0086f7; font-weight: bold">11</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">2</span><span style="color: #ffffff">);</span>
+
+<span style="color: #ffffff">cv.imshow(</span><span style="color: #0086d2">&quot;ADAPTIVE_THRESH_MEAN_C&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">th2)</span>
+
+<span style="color: #ffffff">cv.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+            <Br/><Br/>
+        <img style="border: 1px solid black;margin: 3px;"src="../image/opd37.png"/><br/><Br/>
+
+
+<h4>2. cv.ADAPTIVE_THRESH_GAUSSIAN_C</h4>
+ <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">cv</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.imread(</span><span style="color: #0086d2">&#39;suduko.jpg&#39;</span><span style="color: #ffffff">,</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">th3</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.adaptiveThreshold(img,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">cv.ADAPTIVE_THRESH_GAUSSIAN_C,</span> <span style="color: #ffffff">cv.THRESH_BINARY,</span> <span style="color: #0086f7; font-weight: bold">11</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">2</span><span style="color: #ffffff">);</span>
+
+<span style="color: #ffffff">cv.imshow(</span><span style="color: #0086d2">&quot;ADAPTIVE_THRESH_GAUSSIAN_C&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">th3)</span>
+
+<span style="color: #ffffff">cv.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+<Br/><Br/>
+        <img style="border: 1px solid black;margin: 3px;"src="../image/opd38.png"/><br/><Br/>
+
+        </p>
+        <br>
+        <br><h3> Videos</h3>
+        <iframe width="320" height="215" src="https://www.youtube.com/embed/IlRXaU6E4MA">
+</iframe>
+</div><br><br><br><br><br><br><br><br>
+</body>
+</html>
