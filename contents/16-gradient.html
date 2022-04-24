@@ -136,8 +136,118 @@ html {
         <div id="contents">
     <p>
         <h2>Image Gradients </h2>
-        </p>
-        <br>
+        In this section we will be learning different types of gradient filters or High-pass filters including Sobel and Laplacian.
+
+        <h3>Laplacian Derivatives</h3>
+        A Laplacian filter is an edge detector used to compute the second derivatives of an image, measuring the rate at which the first derivatives change. This determines if a change in adjacent pixel values is from an edge or continuous progression.
+        <Br/><Br/>
+        Laplacian filter kernels usually contain negative values in a cross pattern, centered within the array. The corners are either zero or positive values. The center value can be either negative or positive. The following array is an example of a 3x3 kernel for a Laplacian filter.<br/><Br/>
+        <h4>Code</h4>
+        <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+<span style="color: #fb660a; font-weight: bold">from</span> <span style="color: #ffffff">matplotlib</span> <span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">pyplot</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">plt</span>
+
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.imread(</span><span style="color: #0086d2">&quot;sudoku.jpg&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">cv2.IMREAD_GRAYSCALE)</span>
+<span style="color: #ffffff">lap</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.Laplacian(img,</span> <span style="color: #ffffff">cv2.CV_64F,</span> <span style="color: #ffffff">ksize=</span><span style="color: #0086f7; font-weight: bold">3</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">lap</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">np.uint8(np.absolute(lap))</span>
+
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;Laplacian&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">lap)</span>
+<span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div><Br/>
+<h4>Output</h4>
+        <img style="margin: 3px;" src="../image/opd48.png"/><br/><Br/>
+
+<h4> Sobel Derivatives</h4>
+    Sobel operators is a joint Gausssian smoothing plus differentiation operation, so it is more resistant to noise. You can specify the direction of derivatives to be taken, vertical(SobelY) or horizontal(Sobel Y). You can also specify the size of kernel by the argument ksize. If ksize = -1, a 3x3 Scharr filter is used which gives better results than 3x3 Sobel filter.
+        <br><br/>
+
+        <h4>Code </h4>
+        <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%; color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+<span style="color: #fb660a; font-weight: bold">from</span> <span style="color: #ffffff">matplotlib</span> <span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">pyplot</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">plt</span>
+
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.imread(</span><span style="color: #0086d2">&quot;sudoku.jpg&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">cv2.IMREAD_GRAYSCALE)</span>
+
+<span style="color: #ffffff">sobelX</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.Sobel(img,</span> <span style="color: #ffffff">cv2.CV_64F,</span> <span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">sobelY</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.Sobel(img,</span> <span style="color: #ffffff">cv2.CV_64F,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">)</span>
+
+<span style="color: #ffffff">sobelX</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">np.uint8(np.absolute(sobelX))</span>
+<span style="color: #ffffff">sobelY</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">np.uint8(np.absolute(sobelY))</span>
+
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;SobelX&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">sobelX)</span>
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;SobelY&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">sobelY)</span>
+
+<span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div><Br/><Br/>
+<h4> Output </h4>
+        <img style="margin: 3px;" src="../image/opd49.png"/><br/><Br/>
+        <img style="margin: 3px;" src="../image/opd50.png"/><br/><Br/>
+<h4> SobelX and SobelY</h4>
+We can also combine the result of SobelX and SobelY into a single image using Bitwise OR<br/><br/>
+<h4>Code </h4>
+<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+<span style="color: #fb660a; font-weight: bold">from</span> <span style="color: #ffffff">matplotlib</span> <span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">pyplot</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">plt</span>
+
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.imread(</span><span style="color: #0086d2">&quot;sudoku.jpg&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">cv2.IMREAD_GRAYSCALE)</span>
+<span style="color: #ffffff">sobelX</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.Sobel(img,</span> <span style="color: #ffffff">cv2.CV_64F,</span> <span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">sobelY</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.Sobel(img,</span> <span style="color: #ffffff">cv2.CV_64F,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">)</span>
+
+<span style="color: #ffffff">sobelX</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">np.uint8(np.absolute(sobelX))</span>
+<span style="color: #ffffff">sobelY</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">np.uint8(np.absolute(sobelY))</span>
+
+<span style="color: #ffffff">sobelCombined</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.bitwise_or(sobelX,</span> <span style="color: #ffffff">sobelY)</span>
+
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;Sobel Combined&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">sobelCombined)</span>
+<span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div><Br/><Br/>
+<h4> Output</h4>
+        <img style="margin: 3px;" src="../image/opd51.png"/><br/><Br/>
+
         <br><h3> Videos</h3>
         <iframe width="320" height="215" src="https://www.youtube.com/embed/IlRXaU6E4MA">
 </iframe>

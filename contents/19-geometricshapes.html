@@ -11,9 +11,13 @@ body {
     text-align: justify;
     text-justify: inter-word;
 }
-img{
+.sp{
     height: 30%;
     width: 30%;
+}
+img{
+    height: 45%;
+    width: 45%;
 }
     #contents{
       display: none;
@@ -135,7 +139,112 @@ html {
     </div>
         <div id="contents">
     <p>
-        <h2>OpenCV Functions</h2>
+        <h2>Geometric Shapes</h2>
+        In this section we are going to see how to detect shapes in image. For this we need cv2.findContours() function of OpenCV, and also we are going to use cv2.drawContours() function to draw edges on images. A contour is an outline or a boundary of shape.
+        <br/><Br/>
+        <h3>Functions </h3>
+        
+        <ul>
+            <li><b>cv2.findContours():</b> Basically this method find outs all the boundary points of shape in image.</li>
+            <li>
+            <b>cv2.drawContours():</b> This method draws a contour. It can also draw a shape if you provide boundary points.
+            </li>
+
+        </ul><br/>
+        <h3>Sample Image</h3>
+        <img class="sp" style="margin: 3px;border: 1px solid black;" src="../image/opd55.png"/><br/><Br/>
+        <h4>Code</h4>
+        <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%; color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.imread(</span><span style="color: #0086d2">&#39;shapes.png&#39;</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">imgGrey</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.cvtColor(img,</span> <span style="color: #ffffff">cv2.COLOR_BGR2GRAY)</span>
+<span style="color: #ffffff">_,</span> <span style="color: #ffffff">thrash</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.threshold(imgGrey,</span> <span style="color: #0086f7; font-weight: bold">240</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">cv2.THRESH_BINARY)</span>
+<span style="color: #ffffff">contours,</span> <span style="color: #ffffff">_</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.findContours(thrash,</span> <span style="color: #ffffff">cv2.RETR_TREE,</span> <span style="color: #ffffff">cv2.CHAIN_APPROX_NONE)</span>
+
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;img&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">img)</span>
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># for each contour detected</span>
+<span style="color: #fb660a; font-weight: bold">for</span> <span style="color: #ffffff">contour</span> <span style="color: #ffffff">in</span> <span style="color: #ffffff">contours:</span>
+    <span style="color: #ffffff">approx</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.approxPolyDP(contour,</span> <span style="color: #0086f7; font-weight: bold">0.01</span><span style="color: #ffffff">*</span> <span style="color: #ffffff">cv2.arcLength(contour,</span> <span style="color: #ffffff">True),</span> <span style="color: #ffffff">True)</span>
+    <span style="color: #ffffff">cv2.drawContours(img,</span> <span style="color: #ffffff">[approx],</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">),</span> <span style="color: #0086f7; font-weight: bold">5</span><span style="color: #ffffff">)</span>
+    <span style="color: #ffffff">x</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">approx.ravel()[</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">]</span>
+    <span style="color: #ffffff">y</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">approx.ravel()[</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">]</span> <span style="color: #ffffff">-</span> <span style="color: #0086f7; font-weight: bold">5</span>
+
+    <span style="color: #008800; font-style: italic; background-color: #0f140f"># detect if the shape is triangle</span>
+    <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">len(approx)</span> <span style="color: #ffffff">==</span> <span style="color: #0086f7; font-weight: bold">3</span><span style="color: #ffffff">:</span>
+        <span style="color: #ffffff">cv2.putText(img,</span> <span style="color: #0086d2">&quot;Triangle&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">(x,</span> <span style="color: #ffffff">y),</span> <span style="color: #ffffff">cv2.FONT_HERSHEY_COMPLEX,</span> <span style="color: #0086f7; font-weight: bold">0.5</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">))</span>
+    <span style="color: #008800; font-style: italic; background-color: #0f140f"># if the shape is not a triangle</span>
+    <span style="color: #fb660a; font-weight: bold">elif</span> <span style="color: #ffffff">len(approx)</span> <span style="color: #ffffff">==</span> <span style="color: #0086f7; font-weight: bold">4</span><span style="color: #ffffff">:</span>
+        <span style="color: #ffffff">x1</span> <span style="color: #ffffff">,y1,</span> <span style="color: #ffffff">w,</span> <span style="color: #ffffff">h</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.boundingRect(approx)</span>
+        <span style="color: #ffffff">aspectRatio</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">float(w)/h</span>
+        <span style="color: #008800; font-style: italic; background-color: #0f140f"># check if the shape is square</span>
+        <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">aspectRatio</span> <span style="color: #ffffff">&gt;=</span> <span style="color: #0086f7; font-weight: bold">0.95</span> <span style="color: #ffffff">and</span> <span style="color: #ffffff">aspectRatio</span> <span style="color: #ffffff">&lt;=</span> <span style="color: #0086f7; font-weight: bold">1.05</span><span style="color: #ffffff">:</span>
+          <span style="color: #ffffff">cv2.putText(img,</span> <span style="color: #0086d2">&quot;square&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">(x,</span> <span style="color: #ffffff">y),</span> <span style="color: #ffffff">cv2.FONT_HERSHEY_COMPLEX,</span> <span style="color: #0086f7; font-weight: bold">0.5</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">))</span>
+        <span style="color: #008800; font-style: italic; background-color: #0f140f"># shape is rectangle</span>
+        <span style="color: #fb660a; font-weight: bold">else</span><span style="color: #ffffff">:</span>
+          <span style="color: #ffffff">cv2.putText(img,</span> <span style="color: #0086d2">&quot;rectangle&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">(x,</span> <span style="color: #ffffff">y),</span> <span style="color: #ffffff">cv2.FONT_HERSHEY_COMPLEX,</span> <span style="color: #0086f7; font-weight: bold">0.5</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">))</span>
+    <span style="color: #008800; font-style: italic; background-color: #0f140f"># check if the shape is pentagon</span>
+    <span style="color: #fb660a; font-weight: bold">elif</span> <span style="color: #ffffff">len(approx)</span> <span style="color: #ffffff">==</span> <span style="color: #0086f7; font-weight: bold">5</span><span style="color: #ffffff">:</span>
+        <span style="color: #ffffff">cv2.putText(img,</span> <span style="color: #0086d2">&quot;Pentagon&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">(x,</span> <span style="color: #ffffff">y),</span> <span style="color: #ffffff">cv2.FONT_HERSHEY_COMPLEX,</span> <span style="color: #0086f7; font-weight: bold">0.5</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">))</span>
+    <span style="color: #008800; font-style: italic; background-color: #0f140f"># check if the shape is star</span>
+    <span style="color: #fb660a; font-weight: bold">elif</span> <span style="color: #ffffff">len(approx)</span> <span style="color: #ffffff">==</span> <span style="color: #0086f7; font-weight: bold">10</span><span style="color: #ffffff">:</span>
+        <span style="color: #ffffff">cv2.putText(img,</span> <span style="color: #0086d2">&quot;Star&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">(x,</span> <span style="color: #ffffff">y),</span> <span style="color: #ffffff">cv2.FONT_HERSHEY_COMPLEX,</span> <span style="color: #0086f7; font-weight: bold">0.5</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">))</span>
+    <span style="color: #008800; font-style: italic; background-color: #0f140f"># check if the shape is circle</span>
+    <span style="color: #fb660a; font-weight: bold">else</span><span style="color: #ffffff">:</span>
+        <span style="color: #ffffff">cv2.putText(img,</span> <span style="color: #0086d2">&quot;Circle&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">(x,</span> <span style="color: #ffffff">y),</span> <span style="color: #ffffff">cv2.FONT_HERSHEY_COMPLEX,</span> <span style="color: #0086f7; font-weight: bold">0.5</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">))</span>
+
+
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&quot;shapes&quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">img)</span>
+<span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+<br/><Br/>
+
+<h3> Output </h3>
+        <img style="margin: 3px;border: 1px solid black;" src="../image/opd56.png"/><br/><Br/>
+        Completed Successfully
         </p>
         <br>
         <br><h3> Videos</h3>

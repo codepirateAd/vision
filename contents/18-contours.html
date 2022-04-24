@@ -11,9 +11,13 @@ body {
     text-align: justify;
     text-justify: inter-word;
 }
+.sp{
+    height: 20%;
+    width: 20%;
+}
 img{
-    height: 30%;
-    width: 30%;
+    height: 25%;
+    width: 25%;
 }
     #contents{
       display: none;
@@ -135,7 +139,58 @@ html {
     </div>
         <div id="contents">
     <p>
-        <h2>OpenCV Functions</h2>
+        <h2>Draw Contours</h2>
+        Contours can be explained simply as a curve joining all the continuous points (along the boundary), having same color or intensity. The contours are a useful tool for shape analysis and object detection and recognition.
+
+        <Br/><Br/>For better accuracy, use binary images. So before finding contours, apply threshold or canny edge detection.
+        Since OpenCV 3.2, findContours() no longer modifies the source image but returns a modified image as the first of three return parameters.
+        
+        <br/><Br/>In OpenCV, finding contours is like finding white object from black background. So remember, object to be found should be white and background should be black.
+        <br/><Br/>
+
+        <h3> Sample Image </h3>
+        <img class="sp" style="margin: 3px;border: 1px solid black;" src="../image/tomatoes.jpg"/><br/><Br/>
+        <h4>Code </h4>
+ <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span>
+
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.imread(</span><span style="color: #0086d2">&#39;tomatoes.jpg&#39;</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">imgray</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.cvtColor(img,</span> <span style="color: #ffffff">cv2.COLOR_BGR2GRAY)</span>
+<span style="color: #ffffff">ret,</span> <span style="color: #ffffff">thresh</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.threshold(imgray,</span> <span style="color: #0086f7; font-weight: bold">127</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+
+            <span style="color: #008800; font-style: italic; background-color: #0f140f">#cv2.findContours(Threshold,contour_mode,contour_approximation_method)</span>
+<span style="color: #ffffff">contours,</span> <span style="color: #ffffff">hierarchy</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv2.findContours(thresh,</span> <span style="color: #ffffff">cv2.RETR_TREE,</span> <span style="color: #ffffff">cv2.CHAIN_APPROX_NONE)</span>
+
+<span style="color: #ffffff">cv2.drawContours(img,</span> <span style="color: #ffffff">contours,</span> <span style="color: #ffffff">-</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">),</span> <span style="color: #0086f7; font-weight: bold">3</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv2.drawContours(imgray,</span> <span style="color: #ffffff">contours,</span> <span style="color: #ffffff">-</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">),</span> <span style="color: #0086f7; font-weight: bold">3</span><span style="color: #ffffff">)</span>
+
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&#39;Image&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">img)</span>
+<span style="color: #ffffff">cv2.imshow(</span><span style="color: #0086d2">&#39;Image GRAY&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">imgray)</span>
+<span style="color: #ffffff">cv2.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv2.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+
+<br/><br/>
+<h4>Output</h4>
+        <img style="margin: 3px;border: 1px solid black;" src="../image/opd54.png"/><br/><Br/>
+        <img style="margin: 3px;border: 1px solid black;" src="../image/opd53.png"/><br/><Br/>
+            Completed Successfully
         </p>
         <br>
         <br><h3> Videos</h3>
