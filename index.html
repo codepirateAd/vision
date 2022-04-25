@@ -252,7 +252,8 @@ distancing, and many more. -->
       function hide(){
         document.getElementById("displaycontent").style.display="none";
       }
-
+      if(url.hash=="")
+        home();
       if(url.hash=="#intro")
         intro();
       else if(url.hash=="#env")
@@ -317,6 +318,12 @@ distancing, and many more. -->
         cornerdetect();
 
 
+    function home() {
+            hide();
+            document.getElementById
+                ("iframe1").src = "contents/home.html";
+
+        }
     function intro() {
             hide();
             document.getElementById

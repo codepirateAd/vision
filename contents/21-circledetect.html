@@ -135,7 +135,62 @@ html {
     </div>
         <div id="contents">
     <p>
-        <h2>OpenCV Functions</h2>
+        <h2>Circle Detection using Hough Circle Transform</h2>
+        The Hough Circle Transform works in a roughly analogous way to the Hough Line Transform explained in the previous tutorial.
+        <br/><Br/>In the line detection case, a line was defined by two parameters (r,θ). In the circle case, we need three parameters to define a circle:
+        C:(xcenter,ycenter,r), where (xcenter,ycenter) define the center position (green point) and r is the radius, which allows us to completely define a circle. <Br/><Br/>
+        OpenCV implements a detection method slightly trickier than the standard Hough Transform: The Hough gradient method, which is made up of two main stages. The first stage involves edge detection and finding the possible circle centers and the second stage finds the best radius for each candidate center. For more details, please check the book Learning OpenCV or your favorite Computer Vision bibliography.<br/><br/>
+        <i>circles = cv.HoughCircles(image, method, dp, minDist[,circles[,param1[,param2[,minRadius[,maxRadius]]]]])</i><Br/>
+        <ul>
+            <li><b>image:</b> 8-bit single-channel, grayscale input image</li>
+            <li><b>circles:</b> Output vector of found circles.</li>
+            <li><b>method:</b> Detection method</li>
+            <li><b>dp:</b> Inverse ratio of the accumulator resolution to the image resolution.</li>
+            <li><b>minDist:</b> Minimum distance between the centers of the detecte circles.</li>
+            <li><b>param1:</b> First method-specific parameter. In case of HOUGH_GRADIENT, it is the higher threshold of two passed to the CAnny edge detector.</li>
+            <li><b>param2</b>: Second method-specific parameter. In case of HOUGH_GRADIENT, it is the accumulator threshold for the circle centers at the detection stage.</li>
+            <li><b>minRadius:</b> Minimum circle radius.</li>
+            <li><b>maxRadius:</b> Maximum circle radius. If <=0, uses the maximum image dimension. If < 0, returns centers without finding the radius.</li>
+        </ul>
+        <h4> Code </h4>
+<!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">cv</span>
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.imread(</span><span style="color: #0086d2">&#39;smarties.png&#39;</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">output</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">img.copy()</span>
+<span style="color: #ffffff">gray</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.cvtColor(img,</span> <span style="color: #ffffff">cv.COLOR_BGR2GRAY)</span>
+<span style="color: #ffffff">gray</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.medianBlur(gray,</span> <span style="color: #0086f7; font-weight: bold">5</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">circles</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.HoughCircles(gray,</span> <span style="color: #ffffff">cv.HOUGH_GRADIENT,</span> <span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">20</span><span style="color: #ffffff">,</span>
+                          <span style="color: #ffffff">param1=</span><span style="color: #0086f7; font-weight: bold">50</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">param2=</span><span style="color: #0086f7; font-weight: bold">30</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">minRadius=</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">maxRadius=</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">detected_circles</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">np.uint16(np.around(circles))</span>
+<span style="color: #fb660a; font-weight: bold">for</span> <span style="color: #ffffff">(x,</span> <span style="color: #ffffff">y</span> <span style="color: #ffffff">,r)</span> <span style="color: #ffffff">in</span> <span style="color: #ffffff">detected_circles[</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">:]:</span>
+    <span style="color: #ffffff">cv.circle(output,</span> <span style="color: #ffffff">(x,</span> <span style="color: #ffffff">y),</span> <span style="color: #ffffff">r,</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">),</span> <span style="color: #0086f7; font-weight: bold">3</span><span style="color: #ffffff">)</span>
+    <span style="color: #ffffff">cv.circle(output,</span> <span style="color: #ffffff">(x,</span> <span style="color: #ffffff">y),</span> <span style="color: #0086f7; font-weight: bold">2</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">),</span> <span style="color: #0086f7; font-weight: bold">3</span><span style="color: #ffffff">)</span>
+
+
+<span style="color: #ffffff">cv.imshow(</span><span style="color: #0086d2">&#39;output&#39;</span><span style="color: #ffffff">,output)</span>
+<span style="color: #ffffff">cv.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+<span style="color: #ffffff">cv.destroyAllWindows()</span>
+</pre></td></tr></table></div><br/><br/>
+<h4> Output</h4>
+        <img style="border: 1px solid black;margin: 3px;" src="../image/opd61.png"/><br/><Br/>
+        Completed Successfully
+
         </p>
         <br>
         <br><h3> Videos</h3>

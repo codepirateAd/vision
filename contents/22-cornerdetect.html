@@ -136,6 +136,65 @@ html {
         <div id="contents">
     <p>
         <h2>OpenCV Functions</h2>
+        OpenCV has the function cv.cornerHarris() for this purpose. Its arguments are:
+
+        <ul>
+            <li><b>img-</b> Input image. It should be grayscale and float32 type.</li>
+            <li><b>blockSize-</b> It is the size of neighbourhood considered for corner detection.</li>
+            <li><b>ksize-</b> Aperture parameter of the Sobel derivative used.</li>
+            <li><b>k-</b> Harris detector free parameter in the equation.</li>
+        </ul>
+        <h4> Steps </h4>
+        <ol>
+            <li>Determine which windows produce very large variations in intensity when moved in both X and Y directions.</li>
+            <li> With each such window found, a score is computed</li>
+            <li>After applying a threshold to this score, important corners are selected & marked.</li>
+        </ol><br/>
+        
+        <h3> Code </h3>
+        <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border-width:.1em .1em .1em .1em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%;color: gray;"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">numpy</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">np</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">cv2</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">cv</span>
+
+<span style="color: #ffffff">img</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.imread(</span><span style="color: #0086d2">&#39;chess.jpg&#39;</span><span style="color: #ffffff">)</span>
+
+<span style="color: #ffffff">cv.imshow(</span><span style="color: #0086d2">&#39;img&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">img)</span>
+<span style="color: #ffffff">gray</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.cvtColor(img,</span> <span style="color: #ffffff">cv.COLOR_BGR2GRAY)</span>
+
+<span style="color: #ffffff">gray</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">np.float32(gray)</span>
+<span style="color: #ffffff">dst</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.cornerHarris(gray,</span> <span style="color: #0086f7; font-weight: bold">2</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">3</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0.04</span><span style="color: #ffffff">)</span>
+
+<span style="color: #ffffff">dst</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">cv.dilate(dst,</span> <span style="color: #ffffff">None)</span>
+
+<span style="color: #ffffff">img[dst</span> <span style="color: #ffffff">&gt;</span> <span style="color: #0086f7; font-weight: bold">0.01</span> <span style="color: #ffffff">*</span> <span style="color: #ffffff">dst.max()]</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">[</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">255</span><span style="color: #ffffff">]</span>
+
+<span style="color: #ffffff">cv.imshow(</span><span style="color: #0086d2">&#39;output&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">img)</span>
+
+<span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">cv.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span> <span style="color: #ffffff">&amp;</span> <span style="color: #0086f7; font-weight: bold">0xff</span> <span style="color: #ffffff">==</span> <span style="color: #0086f7; font-weight: bold">27</span><span style="color: #ffffff">:</span>
+    <span style="color: #ffffff">cv.destroyAllWindows()</span>
+</pre></td></tr></table></div>
+<br/><br/>
+
+<h4>Output</h4>
+        <img style="border: 1px solid black;margin: 3px;" src="../image/opd62.png"/><br/><Br/>
+        Completed Successfully
         </p>
         <br>
         <br><h3> Videos</h3>
