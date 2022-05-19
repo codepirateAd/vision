@@ -134,6 +134,8 @@ html {
         <h3 style="margin-left: 0px;" class="blink_me">Please hold on for a moment...</h3>
     </div>
         <div id="contents">
+        <script src="../opencv.js"></script>
+
     <p>
         <h2>Canny Edge Detection</h2>
         OpenCV puts all the above in single function, cv.Canny(). We will see how to use it. First argument is our input image. Second and third arguments are our minVal and maxVal respectively. Fourth argument is aperture_size. It is the size of Sobel kernel used for find image gradients. By default it is 3.<Br/><Br/> Last argument is L2gradient which specifies the equation for finding gradient magnitude. If it is True, it uses the equation mentioned above which is more accurate, otherwise it uses this function: Edge_Gradient(G)=|Gx|+|Gy|. By default, it is False.<Br/><Br/>
@@ -173,13 +175,48 @@ html {
         <Br/><Br/>
         <h4> Output </h4>
         <img style="margin: 3px;border: 1px solid black;" src="../image/opd52.png"/><br/><Br/>
+          <p><h3>Test the code with your own images</h3>
+        <input type="file" id="fileinput">      <input type="number" id="threshold1" max="255" placeholder="Threshold 1" />
+    &nbsp;&nbsp;
+    <input type="number" id="threshold2" placeholder="Threshold 2"255" /><br><br>
+    <!-- <canvas id="myCanvas" height="330" width="299" style="border:1px solid black;"> -->
+<!-- </canvas><br> -->
+<!-- <canvas id="myCanvas1" height="330" width="299" style="border:1px solid black;"> -->
+<!-- </canvas><br> -->
+        <img id="input_img" >
+        <canvas id="output"></canvas><br>
+<!-- <button onclick="display()"> Press</button> -->
+</p>
         Completed  Successfully.
 
         </p>
         <br>
         <br><h3> Videos</h3>
-        <iframe width="320" height="215" src="https://www.youtube.com/embed/IlRXaU6E4MA">
+        <iframe width="320" height="215" src="https://www.youtube.com/embed/DwdPldHfFLc">
 </iframe>
 </div><br><br><br><br><br><br><br><br>
 </body>
 </html>
+<script>
+    let img_input = document.getElementById('input_img');
+    let file_input = document.getElementById('fileinput');
+
+    file_input.addEventListener('change',(e)=> {
+        img_input.src = URL.createObjectURL(e.target.files[0])
+    },false);
+
+    img_input.onload = function(){
+        let mat = cv.imread(img_input);
+        cv.cvtColor(mat,mat,cv.COLOR_RGB2GRAY);
+        let dst = new cv.Mat();
+        thresh1= parseInt(document.getElementById('threshold1').value);
+        thresh2= parseInt(document.getElementById('threshold2').value);
+        console.log(thresh1);
+        console.log(thresh2);
+        cv.Canny(mat, dst, thresh1, thresh2, 3, false);
+
+        cv.imshow('output', dst);
+        mat.delete();
+        dst.delete();
+    }
+</script>

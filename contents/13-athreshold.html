@@ -134,6 +134,8 @@ html {
         <h3 style="margin-left: 0px;" class="blink_me">Please hold on for a moment...</h3>
     </div>
         <div id="contents">
+    <script src="../opencv.js"></script>
+
     <p>
         <h2>Adaptive Thresholding</h2>
         One of the downsides of using simple thresholding methods is that we need to manually supply our threshold value, T. Furthermore, finding a good value of T may require many manual experiments and parameter tunings, which is simply not practical in most situations.
@@ -238,12 +240,44 @@ html {
 </pre></td></tr></table></div>
 <Br/><Br/>
         <img style="border: 1px solid black;margin: 3px;"src="../image/opd38.png"/><br/><Br/>
-
         </p>
+        <p><h3>Test the code with your own images</h3>
+        <input type="file" id="fileinput">      <input type="number" id="threshold" max="255" placeholder="Threshold value" />
+
+    <!-- <canvas id="myCanvas" height="330" width="299" style="border:1px solid black;"> -->
+<!-- </canvas><br> -->
+<!-- <canvas id="myCanvas1" height="330" width="299" style="border:1px solid black;"> -->
+<!-- </canvas><br> --><br/>
+        <img id="input_img" >
+        <canvas id="output"></canvas><br>
+<!-- <button onclick="display()"> Press</button> -->
+</p>
+
         <br>
         <br><h3> Videos</h3>
-        <iframe width="320" height="215" src="https://www.youtube.com/embed/IlRXaU6E4MA">
+        <iframe width="320" height="215" src="https://www.youtube.com/embed/Dco_WFVOhzk">
 </iframe>
 </div><br><br><br><br><br><br><br><br>
 </body>
 </html>
+<script>
+    let img_input = document.getElementById('input_img');
+    let file_input = document.getElementById('fileinput');
+
+    file_input.addEventListener('change',(e)=> {
+        img_input.src = URL.createObjectURL(e.target.files[0])
+    },false);
+
+    img_input.onload = function(){
+        let mat = cv.imread(img_input);
+        cv.cvtColor(mat,mat,cv.COLOR_RGB2GRAY);
+        let dst = new cv.Mat();
+        thresh= parseInt(document.getElementById('threshold').value);
+        console.log(thresh);
+        cv.adaptiveThreshold(mat, dst, thresh, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, 3, 2);
+
+        cv.imshow('output', dst);
+        mat.delete();
+        dst.delete();
+    }
+</script>

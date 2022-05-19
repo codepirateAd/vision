@@ -134,6 +134,8 @@ html {
 		<h3 style="margin-left: 0px;" class="blink_me">Please hold on for a moment...</h3>
 	</div>
 		<div id="contents">
+    <script src="../opencv.js"></script>
+
 	<p>
         <h2>Simple Thresholding</h2>
 
@@ -282,15 +284,49 @@ Inverse of Thresholding to zero<br/><Br/>
 <span style="color: #ffffff">cv.waitKey(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
 <span style="color: #ffffff">cv.destroyAllWindows()</span>
 </pre></td></tr></table></div>
-
-
 <Br/><BR/><img style="border: 1px solid black;margin: 3px;"src="../image/opd33.png"/><br/><Br/>
+        <p><h3>Test the code with your own images</h3>
+        <input type="file" id="fileinput">      <input type="number" id="threshold" max="255" placeholder="Threshold value" />
+    &nbsp;&nbsp;
+    <input type="number" id="threshold_max" placeholder="Maximum value" max="255" /><br><br>
+    <!-- <canvas id="myCanvas" height="330" width="299" style="border:1px solid black;"> -->
+<!-- </canvas><br> -->
+<!-- <canvas id="myCanvas1" height="330" width="299" style="border:1px solid black;"> -->
+<!-- </canvas><br> -->
+        <img id="input_img" >
+        <canvas id="output"></canvas><br>
+<!-- <button onclick="display()"> Press</button> -->
+</p>
+
 Completed Successfully.
 		</p>
 		<br>
 		<br><h3> Videos</h3>
-		<iframe width="320" height="215" src="https://www.youtube.com/embed/IlRXaU6E4MA">
+		<iframe width="320" height="215" src="https://www.youtube.com/embed/LPHD57wrHWI">
 </iframe>
 </div><br><br><br><br><br><br><br><br>
 </body>
 </html>
+<script>
+    let img_input = document.getElementById('input_img');
+    let file_input = document.getElementById('fileinput');
+
+    file_input.addEventListener('change',(e)=> {
+        img_input.src = URL.createObjectURL(e.target.files[0])
+    },false);
+
+    img_input.onload = function(){
+        let mat = cv.imread(img_input);
+        cv.cvtColor(mat,mat,cv.COLOR_RGB2GRAY);
+        let dst = new cv.Mat();
+        thresh= parseInt(document.getElementById('threshold').value);
+        thresh_max= parseInt(document.getElementById('threshold_max').value);
+        console.log(thresh);
+        console.log(thresh_max);
+        cv.threshold(mat, dst, thresh, thresh_max, cv.THRESH_BINARY);
+
+        cv.imshow('output', dst);
+        mat.delete();
+        dst.delete();
+    }
+</script>

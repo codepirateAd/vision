@@ -135,6 +135,8 @@ html {
         <h3 style="margin-left: 0px;" class="blink_me">Please hold on for a moment...</h3>
     </div>
         <div id="contents">
+    <script src="../opencv.js"></script>
+
     <p>
         <h2>Hough Line Transform</h2>
         Hough Transform is a popular technique to detect any shape, if you can represent that shape in mathematical form. It can detect the shape even if it is broken or distorted a little bit. We will see how it works for a line.<br/><br/>
@@ -205,6 +207,14 @@ html {
 <h4> Output </h4>
         <img class="sp" style="margin: 3px;border: 1px solid black;" src="../image/opd59.png"/><br/><Br/>
         <img class="sp" style="margin: 3px;border: 1px solid black;" src="../image/opd60.png"/><br/><Br/>
+         <p><h3>Test the code with your own images</h3>
+        <input type="file" id="fileinput"> <Br/>
+
+        <img id="input_img" >
+        <canvas id="output"></canvas><br>
+<!-- <button onclick="display()"> Press</button> -->
+</p>
+
         Completed Successfully.
         </p>
         <br>
@@ -214,3 +224,31 @@ html {
 </div><br><br><br><br><br><br><br><br>
 </body>
 </html>
+<script>
+    let img_input = document.getElementById('input_img');
+    let file_input = document.getElementById('fileinput');
+
+    file_input.addEventListener('change',(e)=> {
+        img_input.src = URL.createObjectURL(e.target.files[0])
+    },false);
+
+    img_input.onload = function(){
+        let src = cv.imread(img_input);
+let dst = cv.Mat.zeros(src.rows, src.cols, cv.CV_8UC3);
+let lines = new cv.Mat();
+let color = new cv.Scalar(255, 0, 0);
+cv.cvtColor(src, src, cv.COLOR_RGBA2GRAY, 0);
+cv.Canny(src, src, 50, 200, 3);
+// You can try more different parameters
+cv.HoughLinesP(src, lines, 1, Math.PI / 180, 2, 0, 0);
+// draw lines
+for (let i = 0; i < lines.rows; ++i) {
+    let startPoint = new cv.Point(lines.data32S[i * 4], lines.data32S[i * 4 + 1]);
+    let endPoint = new cv.Point(lines.data32S[i * 4 + 2], lines.data32S[i * 4 + 3]);
+    cv.line(dst, startPoint, endPoint, color);
+}
+cv.imshow('output', dst);
+src.delete(); dst.delete(); lines.delete();
+
+    }
+</script>
